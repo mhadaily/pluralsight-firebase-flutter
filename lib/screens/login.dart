@@ -70,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   "assets/hotbeverage.svg",
                   height: MediaQuery.of(context).size.height / 3,
                   width: MediaQuery.of(context).size.width,
-                  semanticsLabel: 'MJ Coffee',
+                  semanticsLabel: 'Wired Brain Coffee',
                   fit: BoxFit.fitWidth,
                 ),
               ),

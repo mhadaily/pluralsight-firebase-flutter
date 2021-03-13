@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
               "assets/hangout.svg",
               height: MediaQuery.of(context).size.height / 3,
               width: MediaQuery.of(context).size.width,
-              semanticsLabel: 'MJ Coffee',
+              semanticsLabel: 'Wired Brain Coffee',
               fit: BoxFit.fitWidth,
             ),
             Text(

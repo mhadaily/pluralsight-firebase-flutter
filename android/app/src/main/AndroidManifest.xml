@@ -5,7 +5,7 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="MJ Coffee"
+        android:label="Wired Brain Coffee"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"

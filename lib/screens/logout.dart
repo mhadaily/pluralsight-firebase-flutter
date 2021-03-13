@@ -31,7 +31,7 @@ class _LogoutScreenState extends State<LogoutScreen> {
                 "assets/coffee_break.svg",
                 height: MediaQuery.of(context).size.height / 3,
                 width: MediaQuery.of(context).size.width,
-                semanticsLabel: 'MJ Coffee',
+                semanticsLabel: 'Wired Brain Coffee',
                 fit: BoxFit.fitWidth,
               ),
             ],
