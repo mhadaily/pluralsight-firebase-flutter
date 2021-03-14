@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:wiredbrain/const.dart';
 
-class ShopsScreen extends StatelessWidget {
-  const ShopsScreen();
+class SupportScreen extends StatelessWidget {
+  const SupportScreen();
 
-  static String routeName = 'Shops';
+  static String routeName = 'Support';
 
   @override
   Widget build(BuildContext context) {

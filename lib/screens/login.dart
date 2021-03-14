@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wiredbrain/data_providers/http_client.dart';
+import 'package:wiredbrain/services/analytics.dart';
 import '../widgets/button.dart';
 import '../widgets/create_account.dart';
 import '../widgets/login_inputs.dart';
 import '../data_providers/auth_data_provider.dart';
-import '../data_providers/auth_provider.dart';
 import '../coffee_router.dart';
 import '../const.dart';
 import 'menu.dart';
@@ -35,6 +36,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final formKey = GlobalKey<FormState>();
   final _emailFieldController = TextEditingController();
   final _passwordFieldController = TextEditingController();
+
+  final AnalyticsService _analyticsService = AnalyticsService();
 
   @override
   void initState() {
@@ -110,8 +113,8 @@ class _LoginScreenState extends State<LoginScreen> {
   _onSubmitLoginButton() async {
     if (_isFormValidated()) {
       widget.scaffoldKey.currentState.showSnackBar(_loadingSnackBar());
+      final BaseAuth auth = AuthDataProvider(http: HttpClient());
 
-      final BaseAuth auth = AuthProvider.of(context)!.auth!;
       final String email = _emailFieldController.text;
       final String password = _passwordFieldController.text;
       final bool loggedIn = await auth.signInWithEmailAndPassword(
@@ -120,8 +123,15 @@ class _LoginScreenState extends State<LoginScreen> {
       );
 
       widget.scaffoldKey.currentState.hideCurrentSnackBar();
-      print(loggedIn);
+
       if (loggedIn) {
+        _analyticsService.logLogin();
+
+        _analyticsService.setUserProperties(
+          userId: email,
+          userRole: 'customer',
+        );
+
         CoffeeRouter.instance.push(MenuScreen.route());
       } else {
         final snackBar = SnackBar(

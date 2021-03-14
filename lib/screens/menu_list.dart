@@ -12,6 +12,8 @@ class MenuList extends StatefulWidget {
 
   final List<Coffee> coffees;
 
+  static String routeName = 'MenuList';
+
   @override
   _MenuListState createState() => _MenuListState();
 }
