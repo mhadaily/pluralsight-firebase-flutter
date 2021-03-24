@@ -4,6 +4,7 @@ import 'package:wiredbrain/widgets/button.dart';
 
 import '../coffee_router.dart';
 import 'login.dart';
+import 'login_email.dart';
 
 class HomeScreen extends StatefulWidget {
   static String routeName = 'homeScreen';
@@ -19,8 +20,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final loginScaffoldKey = GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 CommonButton(
                   onPressed: () {
                     CoffeeRouter.instance.push(
-                      LoginScreen.route(loginScaffoldKey),
+                      LoginEmailScreen.route(),
                     );
                   },
                   text: 'Register',
@@ -63,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 CommonButton(
                   onPressed: () {
                     Navigator.of(context).push(
-                      LoginScreen.route(loginScaffoldKey),
+                      LoginScreen.route(),
                     );
                   },
                   text: 'Log In',

@@ -1,30 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:wiredbrain/data_providers/http_client.dart';
-import 'package:wiredbrain/services/analytics.dart';
-import '../widgets/button.dart';
-import '../widgets/create_account.dart';
-import '../widgets/login_inputs.dart';
-import '../data_providers/auth_data_provider.dart';
-import '../coffee_router.dart';
-import '../constants.dart';
-import 'menu.dart';
+import 'package:wiredbrain/widgets/button.dart';
+import 'package:wiredbrain/widgets/social_button.dart';
+
+import 'login_email.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({
-    required this.scaffoldKey,
-  });
-
-  final scaffoldKey;
+  const LoginScreen();
 
   static String routeName = 'loginScreen';
-  static Route<LoginScreen> route(loginScaffoldKey) {
+  static Route<LoginScreen> route() {
     return MaterialPageRoute<LoginScreen>(
       settings: RouteSettings(name: routeName),
-      builder: (BuildContext context) => LoginScreen(
-        scaffoldKey: loginScaffoldKey,
-      ),
+      builder: (BuildContext context) => const LoginScreen(),
     );
   }
 
@@ -37,8 +26,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailFieldController = TextEditingController();
   final _passwordFieldController = TextEditingController();
 
-  final AnalyticsService _analyticsService = AnalyticsService();
-
   @override
   void initState() {
     super.initState();
@@ -50,7 +37,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      key: widget.scaffoldKey,
       appBar: AppBar(
         title: Text("Login"),
         actions: [
@@ -63,96 +49,46 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32),
-        child: Form(
-          key: formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Center(
-                child: SvgPicture.asset(
-                  "assets/hotbeverage.svg",
-                  height: MediaQuery.of(context).size.height / 3,
-                  width: MediaQuery.of(context).size.width,
-                  semanticsLabel: 'Wired Brain Coffee',
-                  fit: BoxFit.fitWidth,
-                ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Center(
+              child: SvgPicture.asset(
+                "assets/hotbeverage.svg",
+                height: MediaQuery.of(context).size.height / 3,
+                width: MediaQuery.of(context).size.width,
+                semanticsLabel: 'Wired Brain Coffee',
+                fit: BoxFit.fitWidth,
               ),
-              LoginInputs(
-                emailFieldController: _emailFieldController,
-                passwordFieldController: _passwordFieldController,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Text(
-                    "Forgot password?",
-                    style: TextStyle(
-                      color: darkBrown,
-                      fontWeight: FontWeight.w500,
-                    ),
+            ),
+            Flexible(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SignInButton.google(onPressed: () {}),
+                  SizedBox(height: 20),
+                  SignInButton.apple(onPressed: () {}),
+                  SizedBox(height: 20),
+                  SignInButton.twitter(onPressed: () {}),
+                  SizedBox(height: 20),
+                  SignInButton.mail(onPressed: () {
+                    Navigator.of(context).push(
+                      LoginEmailScreen.route(),
+                    );
+                  }),
+                  SizedBox(height: 20),
+                  Center(child: Text('OR')),
+                  SizedBox(height: 20),
+                  CommonButton(
+                    onPressed: () {},
+                    text: 'Continue anonymously',
                   ),
                 ],
               ),
-              CommonButton(
-                onPressed: _onSubmitLoginButton,
-                text: 'login',
-              ),
-              CreateAccount(),
-            ],
-          ),
+            )
+          ],
         ),
-      ),
-    );
-  }
-
-  bool _isFormValidated() {
-    final FormState form = formKey.currentState!;
-    return form.validate();
-  }
-
-  _onSubmitLoginButton() async {
-    if (_isFormValidated()) {
-      widget.scaffoldKey.currentState.showSnackBar(_loadingSnackBar());
-      final BaseAuth auth = AuthDataProvider(http: HttpClient());
-
-      final String email = _emailFieldController.text;
-      final String password = _passwordFieldController.text;
-      final bool loggedIn = await auth.signInWithEmailAndPassword(
-        email,
-        password,
-      );
-
-      widget.scaffoldKey.currentState.hideCurrentSnackBar();
-
-      if (loggedIn) {
-        _analyticsService.logLogin();
-
-        _analyticsService.setUserProperties(
-          userId: email,
-          userRole: 'customer',
-        );
-
-        CoffeeRouter.instance.push(MenuScreen.route());
-      } else {
-        final snackBar = SnackBar(
-          backgroundColor: Colors.red,
-          content: Text('Your username / password is incorrect'),
-        );
-        widget.scaffoldKey.currentState.showSnackBar(snackBar);
-      }
-    }
-  }
-
-  Widget _loadingSnackBar() {
-    return SnackBar(
-      content: Row(
-        children: <Widget>[
-          CircularProgressIndicator(),
-          SizedBox(
-            width: 20,
-          ),
-          Text(" Signing-In...")
-        ],
       ),
     );
   }
