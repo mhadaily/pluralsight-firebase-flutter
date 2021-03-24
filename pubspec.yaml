@@ -17,7 +17,7 @@ dependencies:
   font_awesome_flutter: ^9.0.0-nullsafety
   google_fonts: ^2.0.0
   http: ^0.13.0
-  firebase_core: '^1.0.0'
+  firebase_core: '^1.0.2'
   firebase_analytics: '^7.1.1'
 
 dev_dependencies:
