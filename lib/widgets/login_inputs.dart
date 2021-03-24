@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wiredbrain/const.dart';
+import 'package:wiredbrain/constants.dart';
 import 'package:wiredbrain/helpers/validators.dart';
 
 class LoginInputs extends StatelessWidget {

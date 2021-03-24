@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../coffee_router.dart';
-import '../const.dart' hide coffees;
+import '../constants.dart' hide coffees;
 import './menu_detail.dart';
 import '../models/coffee.dart';
 

@@ -5,7 +5,7 @@ import '../widgets/coffee_count.dart';
 import '../widgets/coffee_size.dart';
 import '../widgets/coffee_sugar.dart';
 import '../models/coffee.dart';
-import '../const.dart';
+import '../constants.dart';
 
 class MenuDetails extends StatefulWidget {
   const MenuDetails({

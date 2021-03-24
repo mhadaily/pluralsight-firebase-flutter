@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:wiredbrain/const.dart';
+import 'package:wiredbrain/constants.dart';
 
 class SupportScreen extends StatelessWidget {
   const SupportScreen();

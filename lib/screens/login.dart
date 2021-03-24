@@ -8,7 +8,7 @@ import '../widgets/create_account.dart';
 import '../widgets/login_inputs.dart';
 import '../data_providers/auth_data_provider.dart';
 import '../coffee_router.dart';
-import '../const.dart';
+import '../constants.dart';
 import 'menu.dart';
 
 class LoginScreen extends StatefulWidget {

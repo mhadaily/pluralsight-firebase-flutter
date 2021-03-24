@@ -6,7 +6,7 @@ import 'package:wiredbrain/services/analytics.dart';
 
 import '../screens/logout.dart';
 import '../screens/support.dart';
-import '../const.dart';
+import '../constants.dart';
 import './menu_list.dart';
 
 class MenuScreen extends StatefulWidget {
