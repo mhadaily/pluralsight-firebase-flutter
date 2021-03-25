@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wiredbrain/screens/register.dart';
 
 import '../constants.dart';
 
@@ -14,11 +15,16 @@ class CreateAccount extends StatelessWidget {
           "Don\'t have an account?",
           style: TextStyle(color: Colors.grey.shade600),
         ),
-        Text(
-          " Register",
-          style: TextStyle(
-            color: darkBrown,
-            fontWeight: FontWeight.w500,
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).push(RegisterScreen.route());
+          },
+          child: Text(
+            " Register",
+            style: TextStyle(
+              color: darkBrown,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
       ],

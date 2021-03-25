@@ -6,26 +6,24 @@ import 'package:wiredbrain/services/analytics.dart';
 import 'package:wiredbrain/services/auth.dart';
 import 'package:wiredbrain/widgets/loading_snack_bar.dart';
 import '../widgets/button.dart';
-import '../widgets/create_account.dart';
 import '../widgets/login_inputs.dart';
 import '../coffee_router.dart';
-import '../constants.dart';
 import 'menu.dart';
 
-class LoginEmailScreen extends StatefulWidget {
-  static String routeName = 'loginEmailScreen';
-  static Route<LoginEmailScreen> route() {
-    return MaterialPageRoute<LoginEmailScreen>(
+class RegisterScreen extends StatefulWidget {
+  static String routeName = 'RegisterScreen';
+  static Route<RegisterScreen> route() {
+    return MaterialPageRoute<RegisterScreen>(
       settings: RouteSettings(name: routeName),
-      builder: (BuildContext context) => LoginEmailScreen(),
+      builder: (BuildContext context) => RegisterScreen(),
     );
   }
 
   @override
-  _LoginEmailScreenState createState() => _LoginEmailScreenState();
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class _LoginEmailScreenState extends State<LoginEmailScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final formKey = GlobalKey<FormState>();
   final _emailFieldController = TextEditingController();
   final _passwordFieldController = TextEditingController();
@@ -34,16 +32,10 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
   final AuthService _authService = AuthService();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text("Login"),
+        title: Text("Register"),
         actions: [
           Image.asset(
             "assets/logo.png",
@@ -60,39 +52,14 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                Center(
-                  child: SvgPicture.asset(
-                    "assets/hotbeverage.svg",
-                    height: MediaQuery.of(context).size.height / 3,
-                    width: MediaQuery.of(context).size.width,
-                    semanticsLabel: 'Wired Brain Coffee',
-                    fit: BoxFit.fitWidth,
-                  ),
-                ),
                 LoginInputs(
                   emailFieldController: _emailFieldController,
                   passwordFieldController: _passwordFieldController,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Forgot password?",
-                        style: TextStyle(
-                          color: darkBrown,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
                 CommonButton(
                   onPressed: _onSubmitLoginButton,
-                  text: 'login',
+                  text: 'Register',
                 ),
-                CreateAccount(),
               ],
             ),
           ),
@@ -114,7 +81,7 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
         ),
       );
 
-      final User? user = await _authService.signInWithEmailAndPassword(
+      final User? user = await _authService.createUserWithEmailAndPassword(
         email: _emailFieldController.text,
         password: _passwordFieldController.text,
       );
@@ -133,9 +100,7 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
       } else {
         final snackBar = SnackBar(
           backgroundColor: Colors.red,
-          content: Text(
-            'Your username / password is incorrect or does not exist!',
-          ),
+          content: Text('Registration went wrong! try again!'),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }

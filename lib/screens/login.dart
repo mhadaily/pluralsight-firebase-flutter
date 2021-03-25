@@ -1,6 +1,12 @@
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wiredbrain/screens/menu.dart';
+import 'package:wiredbrain/services/analytics.dart';
+import 'package:wiredbrain/services/auth.dart';
 import 'package:wiredbrain/widgets/button.dart';
 import 'package:wiredbrain/widgets/social_button.dart';
 
@@ -23,14 +29,39 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final formKey = GlobalKey<FormState>();
-  final _emailFieldController = TextEditingController();
-  final _passwordFieldController = TextEditingController();
+
+  final AnalyticsService _analyticsService = AnalyticsService();
+  final AuthService _authService = AuthService();
+
+  StreamSubscription<User?>? _authChangeSubscription;
 
   @override
   void initState() {
     super.initState();
-    _emailFieldController.text = 'me@majidhajian.com';
-    _passwordFieldController.text = 'me@majidhajian.com';
+    _authChangeSubscription = _authService.authStateChanges().listen((user) {
+      if (user != null) {
+        // which provider users is logged
+        user.providerData.forEach((provider) {
+          _analyticsService.logLogin(loginMethod: provider.providerId);
+        });
+
+        _analyticsService.setUserProperties(
+          userId: user.uid,
+          userRole: 'customer',
+        );
+
+        Navigator.of(context).pushAndRemoveUntil(
+          MenuScreen.route(),
+          (route) => false,
+        );
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _authChangeSubscription?.cancel();
   }
 
   @override
@@ -66,11 +97,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  SignInButton.google(onPressed: () {}),
+                  SignInButton.google(onPressed: () {
+                    _authService.signInWithGoogle();
+                  }),
                   SizedBox(height: 20),
-                  SignInButton.apple(onPressed: () {}),
-                  SizedBox(height: 20),
-                  SignInButton.twitter(onPressed: () {}),
+                  SignInButton.apple(onPressed: () {
+                    _authService.signInWithApple();
+                  }),
                   SizedBox(height: 20),
                   SignInButton.mail(onPressed: () {
                     Navigator.of(context).push(
@@ -81,7 +114,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   Center(child: Text('OR')),
                   SizedBox(height: 20),
                   CommonButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _authService.signInAnonymously();
+                    },
                     text: 'Continue anonymously',
                   ),
                 ],

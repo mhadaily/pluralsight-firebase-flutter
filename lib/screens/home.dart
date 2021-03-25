@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wiredbrain/screens/register.dart';
 import 'package:wiredbrain/widgets/button.dart';
 
 import '../coffee_router.dart';
@@ -50,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 CommonButton(
                   onPressed: () {
                     CoffeeRouter.instance.push(
-                      LoginEmailScreen.route(),
+                      RegisterScreen.route(),
                     );
                   },
                   text: 'Register',

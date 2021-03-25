@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wiredbrain/services/analytics.dart';
+import 'package:wiredbrain/services/auth.dart';
 import 'package:wiredbrain/widgets/button.dart';
 
 class LogoutScreen extends StatefulWidget {
@@ -17,6 +18,7 @@ class LogoutScreen extends StatefulWidget {
 
 class _LogoutScreenState extends State<LogoutScreen> {
   final AnalyticsService _analyticsService = AnalyticsService();
+  final AuthService _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,7 @@ class _LogoutScreenState extends State<LogoutScreen> {
           child: CommonButton(
             onPressed: () {
               _analyticsService.logLogoutPressed();
+              _authService.signOut();
               CoffeeRouter.instance.pushAndRemoveUntil(HomeScreen.route());
             },
             text: 'Logout',

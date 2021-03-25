@@ -1,6 +1,12 @@
 class Validators {
   static String? validateEmail(String? value) {
-    return value!.isEmpty ? 'Email can\'t be empty' : null;
+    final regx = RegExp(r'^[^@]+@[^@]+\.[^@]+');
+    if (value == null || value.isEmpty) {
+      return 'Email can\'t be empty';
+    } else if (!regx.hasMatch(value)) {
+      return 'Email is not valid';
+    }
+    return null;
   }
 
   static String? validatePassword(String? value) {

@@ -18,8 +18,8 @@ class AnalyticsService {
   static FirebaseAnalyticsObserver get observer =>
       FirebaseAnalyticsObserver(analytics: _service._analytics);
 
-  Future<void> logLogin() async {
-    return _analytics.logLogin(loginMethod: 'email');
+  Future<void> logLogin({loginMethod = 'email'}) async {
+    return _analytics.logLogin(loginMethod: loginMethod);
   }
 
   Future<void> setUserProperties({
