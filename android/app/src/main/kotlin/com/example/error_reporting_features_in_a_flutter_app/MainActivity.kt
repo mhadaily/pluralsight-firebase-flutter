@@ -1,4 +1,4 @@
-package com.example.wiredbrain
+package io.wiredbrain.app
 
 import io.flutter.embedding.android.FlutterActivity
 

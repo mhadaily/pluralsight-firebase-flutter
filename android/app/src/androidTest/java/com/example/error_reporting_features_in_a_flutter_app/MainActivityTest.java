@@ -1,4 +1,4 @@
-package com.example.wiredbrain;
+package io.wiredbrain.app;
 
 import androidx.test.rule.ActivityTestRule;
 import dev.flutter.plugins.integration_test.FlutterTestRunner;
@@ -6,7 +6,7 @@ import org.junit.Rule;
 import org.junit.runner.RunWith;
 
 // import MainActivity from our main app
-import com.example.wiredbrain.MainActivity;
+import io.wiredbrain.app.MainActivity;
 
 @RunWith(FlutterTestRunner.class)
 public class MainActivityTest {

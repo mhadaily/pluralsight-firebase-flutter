@@ -142,6 +142,13 @@ class AuthService {
           AppleIDAuthorizationScopes.fullName,
         ],
         nonce: nonce,
+        webAuthenticationOptions: WebAuthenticationOptions(
+          clientId: "firebase.io.wiredbrain.app",
+          redirectUri: Uri.https(
+            "wiredbrain-15518.firebaseapp.com",
+            "/__/auth/handler",
+          ),
+        ),
       );
 
       // Create an `OAuthCredential` from the credential returned by Apple.
