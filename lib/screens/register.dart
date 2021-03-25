@@ -100,7 +100,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
       } else {
         final snackBar = SnackBar(
           backgroundColor: Colors.red,
-          content: Text('Registration went wrong! try again!'),
+          content: Text(
+            'Registration went wrong! User already in use! try again!',
+          ),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }

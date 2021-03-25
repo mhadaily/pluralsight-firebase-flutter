@@ -1,8 +1,11 @@
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:firebase_analytics/observer.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:wiredbrain/data_providers/auth_provider.dart';
 import 'package:wiredbrain/screens/shops.dart';
 import 'package:wiredbrain/services/analytics.dart';
+import 'package:wiredbrain/services/auth.dart';
 
 import '../screens/logout.dart';
 import '../screens/support.dart';
@@ -63,16 +66,16 @@ class _MenuScreenState extends State<MenuScreen> {
         backgroundColor: Colors.white,
         type: BottomNavigationBarType.fixed,
         unselectedItemColor: Colors.brown.shade300,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
+        items: <BottomNavigationBarItem>[
+          const BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: "Menu",
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.location_on),
             label: "Shops",
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.local_drink),
             label: "Support",
           ),

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wiredbrain/screens/forgot_password.dart';
 import 'package:wiredbrain/services/analytics.dart';
 import 'package:wiredbrain/services/auth.dart';
 import 'package:wiredbrain/widgets/loading_snack_bar.dart';
@@ -77,7 +78,11 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          ForgotPasswordScreen.route(),
+                        );
+                      },
                       child: Text(
                         "Forgot password?",
                         style: TextStyle(

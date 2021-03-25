@@ -40,15 +40,36 @@ class AuthService {
     }
   }
 
+  Future<void> sendPasswordResetEmail({
+    required String email,
+  }) async {
+    return _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
+
   Future<User?> createUserWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
-    final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    return userCredential.user;
+    try {
+      final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return userCredential.user;
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<String?> signInWithPhoneNumber(String phone) async {
+    try {
+      final ConfirmationResult confirmationResult =
+          await _firebaseAuth.signInWithPhoneNumber(phone);
+
+      return confirmationResult.verificationId;
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<User?> signInWithGoogle() async {

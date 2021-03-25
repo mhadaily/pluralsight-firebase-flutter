@@ -68,6 +68,17 @@ class SignInButton extends StatelessWidget {
         onPressed: onPressed,
       );
 
+  factory SignInButton.phone({
+    required onPressed,
+  }) =>
+      SignInButton(
+        btnText: 'Sign in with Phone',
+        btnTextColor: Colors.white,
+        btnColor: Colors.grey,
+        icon: FontAwesomeIcons.phone,
+        onPressed: onPressed,
+      );
+
   @override
   Widget build(BuildContext context) {
     return MaterialButton(

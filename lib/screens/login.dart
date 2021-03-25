@@ -28,7 +28,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final formKey = GlobalKey<FormState>();
+  TextEditingController _textFieldController = TextEditingController();
 
   final AnalyticsService _analyticsService = AnalyticsService();
   final AuthService _authService = AuthService();
@@ -97,6 +97,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  // SignInButton.phone(onPressed: () {
+                  //   _displayTextInputDialog(context);
+                  // }),
+                  // SizedBox(height: 20),
                   SignInButton.google(onPressed: () {
                     _authService.signInWithGoogle();
                   }),
@@ -125,6 +129,39 @@ class _LoginScreenState extends State<LoginScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> _displayTextInputDialog(BuildContext context) async {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Phone Number'),
+          content: TextField(
+            controller: _textFieldController,
+            decoration: InputDecoration(hintText: "Phone number"),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('CANCEL'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                final String phoneNumber = _textFieldController.text;
+                if (_textFieldController.text.isNotEmpty) {
+                  _authService.signInWithPhoneNumber(phoneNumber);
+                }
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
