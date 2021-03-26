@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:wiredbrain/services/auth.dart';
 
 import '../coffee_router.dart';
 import 'home.dart';
+import 'menu.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen();
@@ -20,6 +22,8 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final AuthService _authService = AuthService.instance;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,9 +47,13 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(
-      const Duration(milliseconds: 2000),
+      const Duration(milliseconds: 1000),
       () {
-        CoffeeRouter.instance.push(HomeScreen.route());
+        if (_authService.currentUser != null) {
+          CoffeeRouter.instance.pushReplacement(MenuScreen.route());
+        } else {
+          CoffeeRouter.instance.pushReplacement(HomeScreen.route());
+        }
       },
     );
   }

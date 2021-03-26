@@ -6,7 +6,7 @@ import 'package:wiredbrain/widgets/button.dart';
 import '../coffee_router.dart';
 import 'login.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   static String routeName = 'homeScreen';
   static Route<HomeScreen> route() {
     return MaterialPageRoute<HomeScreen>(
@@ -15,11 +15,6 @@ class HomeScreen extends StatefulWidget {
     );
   }
 
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
