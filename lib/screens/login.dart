@@ -35,6 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final AuthService _authService = AuthService.instance;
 
   StreamSubscription<User?>? _authChangeSubscription;
+  bool _loading = false;
 
   @override
   void initState() {
@@ -114,10 +115,22 @@ class _LoginScreenState extends State<LoginScreen> {
                   Center(child: Text('OR')),
                   SizedBox(height: 20),
                   CommonButton(
-                    onPressed: () {
-                      _authService.signInAnonymously();
-                    },
-                    text: 'Continue anonymously',
+                    onPressed: _loading
+                        ? null // disable button
+                        : () async {
+                            setState(() {
+                              _loading = true;
+                            });
+
+                            await _authService.signInAnonymously();
+
+                            setState(() {
+                              _loading = false;
+                            });
+                          },
+                    text: _loading
+                        ? 'Please wait, Login...'
+                        : 'Continue anonymously',
                   ),
                 ],
               ),

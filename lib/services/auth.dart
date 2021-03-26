@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:wiredbrain/widgets/alert_dialog.dart';
@@ -21,8 +22,14 @@ class AuthService {
   User? get currentUser => _firebaseAuth.currentUser;
 
   Future<User?> signInAnonymously() async {
-    final userCredential = await _firebaseAuth.signInAnonymously();
-    return userCredential.user;
+    try {
+      final userCredential = await _firebaseAuth.signInAnonymously();
+      return userCredential.user;
+    } on FirebaseAuthException catch (e) {
+      showAlertDialog(e.message ?? 'SignIn failed');
+    } catch (e) {
+      showAlertDialog(e.toString());
+    }
   }
 
   Future<User?> signInWithEmailAndPassword({
@@ -85,15 +92,17 @@ class AuthService {
         ],
       );
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
-      final googleAuth = await googleUser?.authentication;
-      final userCredential = await _firebaseAuth.signInWithCredential(
-        GoogleAuthProvider.credential(
-          idToken: googleAuth?.idToken,
-          accessToken: googleAuth?.accessToken,
-        ),
-      );
-      return userCredential.user;
-      //
+      // sign in process was aborted
+      if (googleUser != null) {
+        final googleAuth = await googleUser.authentication;
+        final userCredential = await _firebaseAuth.signInWithCredential(
+          GoogleAuthProvider.credential(
+            idToken: googleAuth.idToken,
+            accessToken: googleAuth.accessToken,
+          ),
+        );
+        return userCredential.user;
+      }
     } on FirebaseAuthException catch (e) {
       showAlertDialog(e.message ?? 'SignIn failed');
     } catch (e) {
