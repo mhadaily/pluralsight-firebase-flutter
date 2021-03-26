@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wiredbrain/coffee_router.dart';
 import 'package:wiredbrain/screens/menu.dart';
 import 'package:wiredbrain/services/analytics.dart';
 import 'package:wiredbrain/services/auth.dart';
@@ -50,10 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
           userRole: 'customer',
         );
 
-        Navigator.of(context).pushAndRemoveUntil(
-          MenuScreen.route(),
-          (route) => false,
-        );
+        CoffeeRouter.instance.pushAndRemoveUntil(MenuScreen.route());
       }
     });
   }
@@ -110,9 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   }),
                   SizedBox(height: 20),
                   SignInButton.mail(onPressed: () {
-                    Navigator.of(context).push(
-                      LoginEmailScreen.route(),
-                    );
+                    CoffeeRouter.instance.push(LoginEmailScreen.route());
                   }),
                   SizedBox(height: 20),
                   Center(child: Text('OR')),
@@ -146,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
             TextButton(
               child: Text('CANCEL'),
               onPressed: () {
-                Navigator.pop(context);
+                CoffeeRouter.instance.pop();
               },
             ),
             TextButton(
@@ -156,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 if (_textFieldController.text.isNotEmpty) {
                   _authService.signInWithPhoneNumber(phoneNumber);
                 }
-                Navigator.pop(context);
+                CoffeeRouter.instance.pop();
               },
             ),
           ],

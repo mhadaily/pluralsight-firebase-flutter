@@ -12,9 +12,7 @@ class CoffeeRouter {
   factory CoffeeRouter() => _router;
 
   CoffeeRouter._();
-
   static final CoffeeRouter _router = CoffeeRouter._();
-
   static CoffeeRouter get instance => _router;
 
   /// Key so we can navigate without context.

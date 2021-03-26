@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wiredbrain/screens/register.dart';
 
+import '../coffee_router.dart';
 import '../constants.dart';
 
 class CreateAccount extends StatelessWidget {
@@ -17,7 +18,7 @@ class CreateAccount extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            Navigator.of(context).push(RegisterScreen.route());
+            CoffeeRouter.instance.push(RegisterScreen.route());
           },
           child: Text(
             " Register",

@@ -56,7 +56,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 CommonButton(
                   onPressed: () {
-                    Navigator.of(context).push(
+                    CoffeeRouter.instance.push(
                       LoginScreen.route(),
                     );
                   },

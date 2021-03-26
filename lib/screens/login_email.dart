@@ -79,7 +79,7 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                   children: <Widget>[
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).push(
+                        CoffeeRouter.instance.push(
                           ForgotPasswordScreen.route(),
                         );
                       },
