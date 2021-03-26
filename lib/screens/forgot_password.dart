@@ -25,7 +25,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final formKey = GlobalKey<FormState>();
   final _emailFieldController = TextEditingController();
 
-  final AuthService _authService = AuthService();
+  final AuthService _authService = AuthService.instance;
 
   @override
   Widget build(BuildContext context) {

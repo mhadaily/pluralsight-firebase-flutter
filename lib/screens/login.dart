@@ -30,8 +30,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _textFieldController = TextEditingController();
 
-  final AnalyticsService _analyticsService = AnalyticsService();
-  final AuthService _authService = AuthService();
+  final AnalyticsService _analyticsService = AnalyticsService.instance;
+  final AuthService _authService = AuthService.instance;
 
   StreamSubscription<User?>? _authChangeSubscription;
 

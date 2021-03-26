@@ -18,13 +18,13 @@ class LogoutScreen extends StatefulWidget {
 }
 
 class _LogoutScreenState extends State<LogoutScreen> {
-  final AnalyticsService _analyticsService = AnalyticsService();
-  final AuthService _authService = AuthService();
+  final AnalyticsService _analyticsService = AnalyticsService.instance;
+  final AuthService _authService = AuthService.instance;
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
-        stream: AuthService().authStateChanges(),
+        stream: _authService.authStateChanges(),
         builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
           String? email;
           if (snapshot.hasData) {

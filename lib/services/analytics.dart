@@ -8,12 +8,10 @@ class AnalyticsService {
 
   // Singleton setup: prevents multiple instances of this class.
   factory AnalyticsService() => _service;
-
   AnalyticsService._();
-
   static final AnalyticsService _service = AnalyticsService._();
 
-  static FirebaseAnalytics get instance => _service._analytics;
+  static AnalyticsService get instance => _service;
 
   static FirebaseAnalyticsObserver get observer =>
       FirebaseAnalyticsObserver(analytics: _service._analytics);

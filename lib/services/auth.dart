@@ -7,16 +7,16 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class AuthService {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
   // Singleton setup: prevents multiple instances of this class.
-  factory AuthService() => _service;
   AuthService._();
   static final AuthService _service = AuthService._();
+  factory AuthService() => _service;
 
-  static FirebaseAuth get instance => FirebaseAuth.instance;
+  static AuthService get instance => _service;
 
-  Stream<User?> authStateChanges() => instance.authStateChanges();
-
-  final FirebaseAuth _firebaseAuth = instance;
+  Stream<User?> authStateChanges() => _firebaseAuth.authStateChanges();
 
   User? get currentUser => _firebaseAuth.currentUser;
 

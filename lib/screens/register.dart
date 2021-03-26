@@ -28,8 +28,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _emailFieldController = TextEditingController();
   final _passwordFieldController = TextEditingController();
 
-  final AnalyticsService _analyticsService = AnalyticsService();
-  final AuthService _authService = AuthService();
+  final AnalyticsService _analyticsService = AnalyticsService.instance;
+  final AuthService _authService = AuthService.instance;
 
   @override
   Widget build(BuildContext context) {
