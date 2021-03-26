@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:wiredbrain/widgets/alert_dialog.dart';
 
 class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -35,8 +35,10 @@ class AuthService {
         EmailAuthProvider.credential(email: email, password: password),
       );
       return userCredential.user;
+    } on FirebaseAuthException catch (e) {
+      showAlertDialog(e.message ?? 'SignIn failed');
     } catch (e) {
-      print(e);
+      showAlertDialog(e.toString());
     }
   }
 
@@ -56,8 +58,10 @@ class AuthService {
         password: password,
       );
       return userCredential.user;
+    } on FirebaseAuthException catch (e) {
+      showAlertDialog(e.message ?? 'SignUp failed');
     } catch (e) {
-      print(e);
+      showAlertDialog(e.toString());
     }
   }
 
@@ -68,7 +72,7 @@ class AuthService {
 
       return confirmationResult.verificationId;
     } catch (e) {
-      print(e);
+      showAlertDialog(e.toString());
     }
   }
 
@@ -81,8 +85,6 @@ class AuthService {
         ],
       );
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
-      print(googleUser?.email);
-      print(googleUser?.displayName);
       final googleAuth = await googleUser?.authentication;
       final userCredential = await _firebaseAuth.signInWithCredential(
         GoogleAuthProvider.credential(
@@ -92,20 +94,10 @@ class AuthService {
       );
       return userCredential.user;
       //
-    } on PlatformException {
-      // Google Error
-      throw FirebaseAuthException(
-        code: 'ERROR_MISSING_GOOGLE_ID_TOKEN',
-        message: 'Missing Google ID Token',
-      );
-    } on FirebaseAuthException {
-      // Firebase Error
-      throw FirebaseAuthException(
-        code: 'ERROR_ABORTED_BY_USER',
-        message: 'Sign in aborted by user',
-      );
+    } on FirebaseAuthException catch (e) {
+      showAlertDialog(e.message ?? 'SignIn failed');
     } catch (e) {
-      print(e);
+      showAlertDialog(e.toString());
     }
   }
 
@@ -162,24 +154,16 @@ class AuthService {
       final userCredential =
           await _firebaseAuth.signInWithCredential(oauthCredential);
 
-      print(userCredential.user);
-
       return userCredential.user;
       //
-    } on PlatformException {
-      // Google Error
-      throw FirebaseAuthException(
-        code: 'ERROR_MISSING_GOOGLE_ID_TOKEN',
-        message: 'Missing Google ID Token',
-      );
-    } on FirebaseAuthException {
-      // Firebase Error
-      throw FirebaseAuthException(
-        code: 'ERROR_ABORTED_BY_USER',
-        message: 'Sign in aborted by user',
-      );
+    } on SignInWithAppleAuthorizationException catch (e) {
+      if (e.code != AuthorizationErrorCode.unknown) {
+        showAlertDialog(e.message);
+      }
+    } on FirebaseAuthException catch (e) {
+      showAlertDialog(e.message ?? 'SignIn failed');
     } catch (e) {
-      print(e);
+      showAlertDialog(e.toString());
     }
   }
 

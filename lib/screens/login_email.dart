@@ -35,11 +35,6 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
   final AuthService _authService = AuthService.instance;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -135,14 +130,6 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
         );
 
         CoffeeRouter.instance.push(MenuScreen.route());
-      } else {
-        final snackBar = SnackBar(
-          backgroundColor: Colors.red,
-          content: Text(
-            'Your username / password is incorrect or does not exist!',
-          ),
-        );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
     }
   }
