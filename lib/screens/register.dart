@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wiredbrain/services/analytics.dart';
 import 'package:wiredbrain/services/auth.dart';
 import 'package:wiredbrain/widgets/loading_snack_bar.dart';
@@ -77,7 +76,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (_isFormValidated()) {
       ScaffoldMessenger.of(context).showSnackBar(
         loadingSnackBar(
-          text: " Signing-In...",
+          text: " Creating user...",
         ),
       );
 
@@ -97,14 +96,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
         );
 
         CoffeeRouter.instance.push(MenuScreen.route());
-      } else {
-        final snackBar = SnackBar(
-          backgroundColor: Colors.red,
-          content: Text(
-            'Registration went wrong! User already in use! try again!',
-          ),
-        );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
     }
   }

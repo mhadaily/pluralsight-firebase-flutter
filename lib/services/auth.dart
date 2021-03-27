@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:wiredbrain/widgets/alert_dialog.dart';
@@ -43,7 +42,13 @@ class AuthService {
       );
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
-      showAlertDialog(e.message ?? 'SignIn failed');
+      if (e.code == 'user-not-found') {
+        showAlertDialog('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        showAlertDialog('Wrong password provided for that user.');
+      } else {
+        showAlertDialog(e.message ?? 'SignIn failed');
+      }
     } catch (e) {
       showAlertDialog(e.toString());
     }
@@ -66,7 +71,13 @@ class AuthService {
       );
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
-      showAlertDialog(e.message ?? 'SignUp failed');
+      if (e.code == 'weak-password') {
+        showAlertDialog('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        showAlertDialog('The account already exists for that email.');
+      } else {
+        showAlertDialog(e.message ?? 'SignUp failed');
+      }
     } catch (e) {
       showAlertDialog(e.toString());
     }
