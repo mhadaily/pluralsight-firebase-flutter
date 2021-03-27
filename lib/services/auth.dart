@@ -60,6 +60,36 @@ class AuthService {
     return _firebaseAuth.sendPasswordResetEmail(email: email);
   }
 
+  Future<void> sendEmailVerification({
+    required User user,
+  }) {
+    return user.sendEmailVerification();
+  }
+
+  Future<void> deleteUser({
+    required User user,
+  }) {
+    return user.delete();
+  }
+
+  Future<void> updatePassword({
+    required User user,
+    required String newPassword,
+  }) {
+    return user.updatePassword(newPassword);
+  }
+
+  Future<void> updateProfile({
+    required User user,
+    required String photoURL,
+    required String displayName,
+  }) {
+    return user.updateProfile(
+      photoURL: photoURL,
+      displayName: displayName,
+    );
+  }
+
   Future<User?> createUserWithEmailAndPassword({
     required String email,
     required String password,

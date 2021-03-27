@@ -26,11 +26,7 @@ class _LogoutScreenState extends State<LogoutScreen> {
     return StreamBuilder<User?>(
       stream: _authService.authStateChanges(),
       builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
-        String? email;
-        if (snapshot.hasData) {
-          final User? user = snapshot.data;
-          email = user?.email ?? 'Not Set';
-        }
+        final User? user = snapshot.data;
         return Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
@@ -49,14 +45,21 @@ class _LogoutScreenState extends State<LogoutScreen> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: Text('Email: $email'),
+              child: Text('Email: ${user?.email}'),
             ),
+            if (user != null && !user.emailVerified)
+              CommonButton(
+                text: 'Verify Your Email',
+                onPressed: () {
+                  _authService.sendEmailVerification(user: user);
+                },
+              ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: CommonButton(
-                onPressed: () {
-                  _analyticsService.logLogoutPressed();
-                  _authService.signOut();
+                onPressed: () async {
+                  await _analyticsService.logLogoutPressed();
+                  await _authService.signOut();
                   CoffeeRouter.instance.pushAndRemoveUntil(HomeScreen.route());
                 },
                 text: 'Logout',

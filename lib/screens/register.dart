@@ -9,7 +9,7 @@ import '../widgets/login_inputs.dart';
 import '../coffee_router.dart';
 import 'menu.dart';
 
-class RegisterScreen extends StatefulWidget {
+class RegisterScreen extends StatelessWidget {
   static String routeName = 'RegisterScreen';
   static Route<RegisterScreen> route() {
     return MaterialPageRoute<RegisterScreen>(
@@ -18,11 +18,6 @@ class RegisterScreen extends StatefulWidget {
     );
   }
 
-  @override
-  _RegisterScreenState createState() => _RegisterScreenState();
-}
-
-class _RegisterScreenState extends State<RegisterScreen> {
   final formKey = GlobalKey<FormState>();
   final _emailFieldController = TextEditingController();
   final _passwordFieldController = TextEditingController();
@@ -56,7 +51,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   passwordFieldController: _passwordFieldController,
                 ),
                 CommonButton(
-                  onPressed: _onSubmitLoginButton,
+                  onPressed: () {
+                    _onSubmitLoginButton(context);
+                  },
                   text: 'Register',
                 ),
               ],
@@ -72,7 +69,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return form.validate();
   }
 
-  _onSubmitLoginButton() async {
+  _onSubmitLoginButton(context) async {
     if (_isFormValidated()) {
       ScaffoldMessenger.of(context).showSnackBar(
         loadingSnackBar(
