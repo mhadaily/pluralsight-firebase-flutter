@@ -8,16 +8,16 @@ import 'package:wiredbrain/services/analytics.dart';
 import 'package:wiredbrain/services/auth.dart';
 import 'package:wiredbrain/widgets/button.dart';
 
-class LogoutScreen extends StatefulWidget {
-  const LogoutScreen();
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen();
 
-  static String routeName = 'Logout';
+  static String routeName = 'profile';
 
   @override
-  _LogoutScreenState createState() => _LogoutScreenState();
+  _ProfileScreenState createState() => _ProfileScreenState();
 }
 
-class _LogoutScreenState extends State<LogoutScreen> {
+class _ProfileScreenState extends State<ProfileScreen> {
   final AnalyticsService _analyticsService = AnalyticsService.instance;
   final AuthService _authService = AuthService.instance;
 
@@ -26,6 +26,9 @@ class _LogoutScreenState extends State<LogoutScreen> {
     return StreamBuilder<User?>(
       stream: _authService.authStateChanges(),
       builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
+        if (!snapshot.hasData) {
+          // show loading...
+        }
         final User? user = snapshot.data;
         return Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -51,7 +54,7 @@ class _LogoutScreenState extends State<LogoutScreen> {
               CommonButton(
                 text: 'Verify Your Email',
                 onPressed: () {
-                  _authService.sendEmailVerification(user: user);
+                  user.sendEmailVerification();
                 },
               ),
             Padding(

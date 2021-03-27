@@ -3,9 +3,8 @@ import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:wiredbrain/screens/shops.dart';
 import 'package:wiredbrain/services/analytics.dart';
-import 'package:wiredbrain/services/auth.dart';
 
-import '../screens/logout.dart';
+import 'profile.dart';
 import '../screens/support.dart';
 import '../constants.dart';
 import './menu_list.dart';
@@ -30,7 +29,7 @@ class _MenuScreenState extends State<MenuScreen> {
     MenuList(coffees: coffees),
     ShopsScreen(),
     SupportScreen(),
-    LogoutScreen(),
+    ProfileScreen(),
   ];
 
   final FirebaseAnalyticsObserver observer = AnalyticsService.observer;
