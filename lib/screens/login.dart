@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,7 +31,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _textFieldController = TextEditingController();
-
   final AnalyticsService _analyticsService = AnalyticsService.instance;
   final AuthService _authService = AuthService.instance;
 
@@ -46,12 +46,10 @@ class _LoginScreenState extends State<LoginScreen> {
         user.providerData.forEach((provider) {
           _analyticsService.logLogin(loginMethod: provider.providerId);
         });
-
         _analyticsService.setUserProperties(
           userId: user.uid,
           userRole: 'customer',
         );
-
         CoffeeRouter.instance.pushAndRemoveUntil(MenuScreen.route());
       }
     });
@@ -104,10 +102,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     _authService.signInWithGoogle();
                   }),
                   SizedBox(height: 20),
-                  SignInButton.apple(onPressed: () {
-                    _authService.signInWithApple();
-                  }),
-                  SizedBox(height: 20),
+                  if (Platform.isIOS)
+                    FutureBuilder<bool>(
+                      future: _authService.isAppleSignInAvailable(),
+                      builder: (context, AsyncSnapshot<bool> snapshot) {
+                        final bool isAvailable = snapshot.data ?? false;
+                        if (isAvailable) {
+                          return SignInButton.apple(onPressed: () {
+                            _authService.signInWithApple();
+                          });
+                        }
+                        return SizedBox();
+                      },
+                    ),
+                  if (Platform.isIOS) SizedBox(height: 20),
                   SignInButton.mail(onPressed: () {
                     CoffeeRouter.instance.push(LoginEmailScreen.route());
                   }),

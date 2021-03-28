@@ -135,10 +135,14 @@ class AuthService {
         return userCredential.user;
       }
     } on FirebaseAuthException catch (e) {
-      showAlertDialog(e.message ?? 'SignIn failed');
+      showAlertDialog(e.message ?? 'SignIn with Google failed');
     } catch (e) {
       showAlertDialog(e.toString());
     }
+  }
+
+  Future<bool> isAppleSignInAvailable() {
+    return SignInWithApple.isAvailable();
   }
 
   /// Generates a cryptographically secure random nonce, to be included in a
@@ -174,13 +178,12 @@ class AuthService {
           AppleIDAuthorizationScopes.fullName,
         ],
         nonce: nonce,
-        webAuthenticationOptions: WebAuthenticationOptions(
-          clientId: "firebase.io.wiredbrain.app",
-          redirectUri: Uri.https(
-            "wiredbrain-15518.firebaseapp.com",
-            "/__/auth/handler",
-          ),
-        ),
+        // webAuthenticationOptions: WebAuthenticationOptions(
+        //   clientId: "firebase.io.wiredbrain.app",
+        //   redirectUri: Uri.parse(
+        //     'https://pluralsight-firebase-flutter.glitch.me/callbacks/sign_in_with_apple',
+        //   ),
+        // ),
       );
 
       // Create an `OAuthCredential` from the credential returned by Apple.
