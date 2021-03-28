@@ -49,11 +49,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: Text('Email: ${user?.email}'),
-            ),
-            if (user != null && !user.emailVerified)
+            if (user != null && user.isAnonymous)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Text('You are logged in annonymously!'),
+              ),
+            if (user != null && !user.isAnonymous)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Text('Email: ${user.email}'),
+              ),
+            if (user != null && !user.emailVerified && !user.isAnonymous)
               CommonButton(
                 text: 'Verify Your Email',
                 onPressed: () {

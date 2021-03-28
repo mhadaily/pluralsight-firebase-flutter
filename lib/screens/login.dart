@@ -102,20 +102,19 @@ class _LoginScreenState extends State<LoginScreen> {
                     _authService.signInWithGoogle();
                   }),
                   SizedBox(height: 20),
-                  if (Platform.isIOS)
-                    FutureBuilder<bool>(
-                      future: _authService.isAppleSignInAvailable(),
-                      builder: (context, AsyncSnapshot<bool> snapshot) {
-                        final bool isAvailable = snapshot.data ?? false;
-                        if (isAvailable) {
-                          return SignInButton.apple(onPressed: () {
-                            _authService.signInWithApple();
-                          });
-                        }
-                        return SizedBox();
-                      },
-                    ),
-                  if (Platform.isIOS) SizedBox(height: 20),
+                  FutureBuilder<bool>(
+                    future: _authService.isAppleSignInAvailable(),
+                    builder: (context, AsyncSnapshot<bool> snapshot) {
+                      final bool isAvailable = snapshot.data ?? false;
+                      if (isAvailable) {
+                        return SignInButton.apple(onPressed: () {
+                          _authService.signInWithApple();
+                        });
+                      }
+                      return SizedBox();
+                    },
+                  ),
+                  SizedBox(height: 20),
                   SignInButton.mail(onPressed: () {
                     CoffeeRouter.instance.push(LoginEmailScreen.route());
                   }),
