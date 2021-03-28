@@ -27,7 +27,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
       stream: _authService.authStateChanges(),
       builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
         if (!snapshot.hasData) {
-          // show loading...
+          return CircularProgressIndicator();
+        }
+        if (snapshot.hasError) {
+          return Scaffold(body: Center(child: Text('Error!')));
         }
         final User? user = snapshot.data;
         return Column(

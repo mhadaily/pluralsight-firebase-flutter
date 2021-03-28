@@ -92,7 +92,7 @@ class RegisterScreen extends StatelessWidget {
           userRole: 'customer',
         );
 
-        CoffeeRouter.instance.push(MenuScreen.route());
+        CoffeeRouter.instance.pushAndRemoveUntil(MenuScreen.route());
       }
     }
   }
