@@ -16,7 +16,7 @@ class CoffeeCartExtraInfo extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
         children: [
-          Text('Details:'),
+          Text('Details: ${item.quantity} x ${item.coffee.name}'),
           CoffeeSize(
             icon: item.coffee.iconData,
             size: item.size,
