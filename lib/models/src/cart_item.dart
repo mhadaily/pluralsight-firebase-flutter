@@ -12,13 +12,13 @@ class CartItem {
     this.id,
     required this.coffee,
     required this.size,
-    required this.count,
+    required this.quantity,
     required this.sugar,
     required this.additions,
   });
 
   num get total => getCartItemsTotal(
-        count: count,
+        count: quantity,
         price: coffee.price,
         additions: additions.length,
         size: size.index,
@@ -31,7 +31,7 @@ class CartItem {
 
   final CoffeeCupSize size;
   final CoffeeSugarCube sugar;
-  final int count;
+  final int quantity;
   final List<CoffeeAddition> additions;
 
   factory CartItem.fromJson(Map<String, dynamic> json) =>

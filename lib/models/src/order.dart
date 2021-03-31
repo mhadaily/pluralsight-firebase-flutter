@@ -21,7 +21,7 @@ class Order {
   num get total => items
       .map(
         (item) => getCartItemsTotal(
-          count: item.count,
+          count: item.quantity,
           price: item.coffee.price,
           additions: item.additions.length,
           size: item.size.index,

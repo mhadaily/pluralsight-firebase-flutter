@@ -21,6 +21,35 @@ class AnalyticsService {
     return _analytics.logLogin(loginMethod: loginMethod);
   }
 
+  Future<void> logAddToCart({
+    required String itemId,
+    required String itemName,
+    required String itemCategory,
+    required int quantity,
+  }) async {
+    return _analytics.logAddToCart(
+      itemId: itemId,
+      itemName: itemName,
+      itemCategory: itemCategory,
+      quantity: quantity,
+    );
+  }
+
+  Future<void> logPlaceOrder({
+    required List<String> coffees,
+    required num total,
+    required int quantity,
+  }) async {
+    return _analytics.logEvent(
+      name: 'place_order',
+      parameters: {
+        'quantity': quantity,
+        'total': total,
+        'coffees': coffees,
+      },
+    );
+  }
+
   Future<void> setUserProperties({
     required String userId,
     required List<UserRole> userRoles,

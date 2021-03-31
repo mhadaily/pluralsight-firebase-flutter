@@ -14,6 +14,7 @@ class CartScreen extends StatelessWidget {
   final GlobalKey<AnimatedListState> listKey = GlobalKey<AnimatedListState>();
   final FirestoreService _firestoreService = FirestoreService.instance;
   final AuthService _authService = AuthService.instance;
+  final AnalyticsService _analyticsService = AnalyticsService.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +49,7 @@ class CartScreen extends StatelessWidget {
                         Animation<double> animation,
                       ) {
                         final CartItem item = items[index];
+                        
                         return Dismissible(
                           key: Key(item.id ?? '$index'),
                           background: Container(color: Colors.red[700]),
@@ -71,7 +73,7 @@ class CartScreen extends StatelessWidget {
                             onPressed: () {},
                             child: ListTile(
                               title: Text(item.coffee.name),
-                              leading: Text('${item.count}  x'),
+                              leading: Text('${item.quantity}  x'),
                               trailing: Text('\$${item.total.toString()}'),
                               subtitle: CoffeeCartExtraInfo(item: item),
                             ),
@@ -87,6 +89,12 @@ class CartScreen extends StatelessWidget {
                     highlighColor: true,
                     onPressed: () async {
                       await _firestoreService.submitOrder(userId, items);
+
+                      await _analyticsService.logPlaceOrder(
+                        coffees: items.map((item) => item.coffee.id).toList(),
+                        total: cartTotal,
+                        quantity: items.length,
+                      );
 
                       CoffeeRouter.instance.pushReplacement(
                         MenuScreen.route(),

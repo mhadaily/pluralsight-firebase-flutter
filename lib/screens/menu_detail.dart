@@ -33,8 +33,9 @@ class MenuDetails extends StatefulWidget {
 class _MenuDetailsState extends State<MenuDetails> {
   final FirestoreService _firestoreService = FirestoreService.instance;
   final AuthService _authService = AuthService.instance;
+  final AnalyticsService _analyticsService = AnalyticsService.instance;
 
-  int totalCount = 1;
+  int quantity = 1;
   CoffeeCupSize size = CoffeeCupSize.medium;
   CoffeeSugarCube sugar = CoffeeSugarCube.no;
   List<CoffeeAddition> additions = [CoffeeAddition.cake];
@@ -76,7 +77,7 @@ class _MenuDetailsState extends State<MenuDetails> {
                           price: coffee.price,
                           notifyValue: (int count) {
                             setState(() {
-                              totalCount = count;
+                              quantity = count;
                             });
                           },
                         ),
@@ -124,9 +125,16 @@ class _MenuDetailsState extends State<MenuDetails> {
                                 coffee: coffee,
                                 size: size,
                                 sugar: sugar,
-                                count: totalCount,
+                                quantity: quantity,
                                 additions: additions,
                               ),
+                            );
+
+                            await _analyticsService.logAddToCart(
+                              itemId: coffee.id,
+                              itemName: coffee.name,
+                              itemCategory: 'Coffees',
+                              quantity: quantity,
                             );
 
                             ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -162,7 +170,7 @@ class _MenuDetailsState extends State<MenuDetails> {
 
   num total(price) {
     return getCartItemsTotal(
-      count: totalCount,
+      count: quantity,
       price: price,
       additions: additions.length,
       size: size.index,
