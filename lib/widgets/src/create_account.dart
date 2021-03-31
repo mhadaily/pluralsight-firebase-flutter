@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:wiredbrain/coffee_router.dart';
+import 'package:wiredbrain/constants.dart';
 import 'package:wiredbrain/screens/register.dart';
-
-import '../coffee_router.dart';
-import '../constants.dart';
 
 class CreateAccount extends StatelessWidget {
   const CreateAccount({Key? key}) : super(key: key);

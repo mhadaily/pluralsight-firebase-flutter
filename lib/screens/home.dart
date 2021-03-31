@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wiredbrain/coffee_router.dart';
+import 'package:wiredbrain/screens/login.dart';
 import 'package:wiredbrain/screens/register.dart';
-import 'package:wiredbrain/widgets/button.dart';
-
-import '../coffee_router.dart';
-import 'login.dart';
+import 'package:wiredbrain/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   static String routeName = 'homeScreen';

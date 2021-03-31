@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:wiredbrain/coffee_router.dart';
+import 'package:wiredbrain/constants.dart';
 import 'package:wiredbrain/helpers/helpers.dart';
 import 'package:wiredbrain/enums/enums.dart';
 import 'package:wiredbrain/models/models.dart';
 import 'package:wiredbrain/services/services.dart';
-import 'package:wiredbrain/widgets/button.dart';
-import 'package:wiredbrain/widgets/loading_snack_bar.dart';
-
-import '../widgets/coffee_additions.dart';
-import '../widgets/coffee_count.dart';
-import '../widgets/coffee_size.dart';
-import '../widgets/coffee_sugar.dart';
-import '../constants.dart';
+import 'package:wiredbrain/widgets/widgets.dart';
 
 class MenuDetails extends StatefulWidget {
   const MenuDetails({

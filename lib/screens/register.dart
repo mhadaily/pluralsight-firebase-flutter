@@ -1,13 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:wiredbrain/coffee_router.dart';
 import 'package:wiredbrain/enums/enums.dart';
+import 'package:wiredbrain/screens/menu.dart';
 import 'package:wiredbrain/services/services.dart';
-import 'package:wiredbrain/widgets/loading_snack_bar.dart';
-import '../widgets/button.dart';
-import '../widgets/login_inputs.dart';
-import '../coffee_router.dart';
-import 'menu.dart';
+import 'package:wiredbrain/widgets/widgets.dart';
 
 class RegisterScreen extends StatelessWidget {
   static String routeName = 'RegisterScreen';

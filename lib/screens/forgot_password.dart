@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:wiredbrain/coffee_router.dart';
+import 'package:wiredbrain/constants.dart';
 import 'package:wiredbrain/helpers/helpers.dart';
 import 'package:wiredbrain/screens/home.dart';
 import 'package:wiredbrain/services/services.dart';
-import 'package:wiredbrain/widgets/loading_snack_bar.dart';
-import '../constants.dart';
-import '../widgets/button.dart';
-import '../coffee_router.dart';
+import 'package:wiredbrain/widgets/widgets.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   static String routeName = 'ForgotPasswordScreen';

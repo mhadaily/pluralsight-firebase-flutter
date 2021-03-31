@@ -6,12 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wiredbrain/coffee_router.dart';
 import 'package:wiredbrain/enums/enums.dart';
+import 'package:wiredbrain/screens/login_email.dart';
 import 'package:wiredbrain/screens/menu.dart';
 import 'package:wiredbrain/services/services.dart';
-import 'package:wiredbrain/widgets/button.dart';
-import 'package:wiredbrain/widgets/social_button.dart';
-
-import 'login_email.dart';
+import 'package:wiredbrain/widgets/widgets.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen();

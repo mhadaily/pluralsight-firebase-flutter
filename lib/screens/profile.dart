@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wiredbrain/services/services.dart';
-import 'package:wiredbrain/widgets/button.dart';
+import 'package:wiredbrain/widgets/widgets.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen();

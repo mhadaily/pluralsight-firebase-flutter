@@ -2,12 +2,11 @@
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:wiredbrain/screens/cart.dart';
+import 'package:wiredbrain/screens/menu_list.dart';
+import 'package:wiredbrain/screens/orders.dart';
+import 'package:wiredbrain/screens/profile.dart';
 import 'package:wiredbrain/services/services.dart';
-import 'package:wiredbrain/widgets/cart_badge.dart';
-
-import 'profile.dart';
-import 'orders.dart';
-import './menu_list.dart';
+import 'package:wiredbrain/widgets/widgets.dart';
 
 class MenuScreen extends StatefulWidget {
   static String routeName = 'menuScreen';
