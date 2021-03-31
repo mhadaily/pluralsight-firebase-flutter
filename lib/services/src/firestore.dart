@@ -124,9 +124,12 @@ class FirestoreService {
 
         // Sets data on the document, overwriting any existing data. If the document
         // does not yet exist, it will be created.
-        await newDocument.set({
-          'roles': roles.map((role) => role.name).toList(),
-        });
+        await newDocument.set(
+          {
+            'roles': roles.map((role) => role.name).toList(),
+          },
+          SetOptions(merge: true),
+        );
       }
     } catch (e) {
       print('Create User Error!');
