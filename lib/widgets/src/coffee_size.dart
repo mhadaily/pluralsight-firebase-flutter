@@ -6,11 +6,13 @@ class CoffeeSize extends StatelessWidget {
     Key? key,
     required this.icon,
     required this.size,
+    this.lessSpace = false,
     required this.onPressed,
   }) : super(key: key);
 
   final IconData icon;
   final CoffeeCupSize size;
+  final bool lessSpace;
   final Function(CoffeeCupSize) onPressed;
 
   @override
@@ -18,13 +20,15 @@ class CoffeeSize extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        Text(
-          "Size",
-          style: TextStyle(
-            color: Colors.grey.shade700,
+        if (!lessSpace) ...[
+          Text(
+            "Size",
+            style: TextStyle(
+              color: Colors.grey.shade700,
+            ),
           ),
-        ),
-        SizedBox(width: 50),
+          SizedBox(width: 50),
+        ],
         IconButton(
           icon: Icon(
             icon,

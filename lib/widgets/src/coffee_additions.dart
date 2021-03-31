@@ -6,9 +6,11 @@ class CoffeeAdditions extends StatelessWidget {
     Key? key,
     required this.additions,
     required this.onPressed,
+    this.lessSpace = false,
   }) : super(key: key);
 
   final List<CoffeeAddition> additions;
+  final bool lessSpace;
   final Function(List<CoffeeAddition>) onPressed;
 
   get hasCake {
@@ -28,13 +30,15 @@ class CoffeeAdditions extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        Text(
-          "Additions",
-          style: TextStyle(
-            color: Colors.grey.shade700,
+        if (!lessSpace) ...[
+          Text(
+            "Additions",
+            style: TextStyle(
+              color: Colors.grey.shade700,
+            ),
           ),
-        ),
-        SizedBox(width: 14),
+          SizedBox(width: 14),
+        ],
         IconButton(
           icon: Icon(
             CoffeeAddition.cake.iconData,

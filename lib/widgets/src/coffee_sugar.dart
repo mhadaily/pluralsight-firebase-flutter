@@ -5,10 +5,12 @@ class CoffeeSugar extends StatelessWidget {
   CoffeeSugar({
     Key? key,
     required this.sugar,
+    this.lessSpace = false,
     required this.onPressed,
   }) : super(key: key);
 
   final CoffeeSugarCube sugar;
+  final bool lessSpace;
   final Function(CoffeeSugarCube) onPressed;
 
   @override
@@ -16,13 +18,15 @@ class CoffeeSugar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        Text(
-          "Sugar",
-          style: TextStyle(
-            color: Colors.grey.shade700,
+        if (!lessSpace) ...[
+          Text(
+            "Sugar",
+            style: TextStyle(
+              color: Colors.grey.shade700,
+            ),
           ),
-        ),
-        SizedBox(width: 40),
+          SizedBox(width: 40),
+        ],
         IconButton(
           icon: Icon(
             CoffeeSugarCube.no.iconData,

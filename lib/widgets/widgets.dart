@@ -9,3 +9,6 @@ export 'src/create_account.dart';
 export 'src/loading_snack_bar.dart';
 export 'src/login_inputs.dart';
 export 'src/social_button.dart';
+export 'src/total_amount.dart';
+export 'src/coffee_cart_extra_info.dart';
+export 'src/no_items.dart';

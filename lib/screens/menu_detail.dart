@@ -109,19 +109,7 @@ class _MenuDetailsState extends State<MenuDetails> {
                           },
                         ),
                         Divider(height: 3),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "Total:",
-                              style: Theme.of(context).textTheme.headline6,
-                            ),
-                            Text(
-                              "\$${total(coffee.price)}",
-                              style: Theme.of(context).textTheme.headline6,
-                            ),
-                          ],
-                        ),
+                        TotalAmount(cartTotal: total(coffee.price)),
                         CommonButton(
                           onPressed: () async {
                             ScaffoldMessenger.of(context).showSnackBar(

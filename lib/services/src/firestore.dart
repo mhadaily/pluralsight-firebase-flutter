@@ -13,7 +13,10 @@ class FirestoreService {
 
   static FirestoreService get instance => _service;
 
-  Future<void> deleteUserCartItem(String userId, String cartId) async {
+  Future<void> deleteUserCartItem({
+    required String userId,
+    required String cartId,
+  }) async {
     final path = ApiPath.userCartItem(userId, cartId);
     final DocumentReference document = _firebaseFirestore.doc(path);
     await document.delete();
