@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wiredbrain/models/models.dart';
-import 'package:wiredbrain/services/auth.dart';
-import 'package:wiredbrain/services/firestore.dart';
+import 'package:wiredbrain/services/services.dart';
 
 class CartBadge extends StatelessWidget {
   CartBadge({

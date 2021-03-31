@@ -7,9 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wiredbrain/coffee_router.dart';
 import 'package:wiredbrain/enums/enums.dart';
 import 'package:wiredbrain/screens/menu.dart';
-import 'package:wiredbrain/services/analytics.dart';
-import 'package:wiredbrain/services/auth.dart';
-import 'package:wiredbrain/services/firestore.dart';
+import 'package:wiredbrain/services/services.dart';
 import 'package:wiredbrain/widgets/button.dart';
 import 'package:wiredbrain/widgets/social_button.dart';
 

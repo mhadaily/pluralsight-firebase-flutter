@@ -2,7 +2,7 @@
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:wiredbrain/screens/cart.dart';
-import 'package:wiredbrain/services/analytics.dart';
+import 'package:wiredbrain/services/services.dart';
 import 'package:wiredbrain/widgets/cart_badge.dart';
 
 import 'profile.dart';

@@ -3,7 +3,7 @@ import 'package:wiredbrain/coffee_router.dart';
 import 'package:wiredbrain/constants.dart';
 import 'package:wiredbrain/models/models.dart';
 import 'package:wiredbrain/screens/menu_detail.dart';
-import 'package:wiredbrain/services/firestore.dart';
+import 'package:wiredbrain/services/services.dart';
 
 class CoffeeItem extends StatelessWidget {
   CoffeeItem({

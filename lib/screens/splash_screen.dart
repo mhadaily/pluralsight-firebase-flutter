@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:wiredbrain/enums/enums.dart';
-import 'package:wiredbrain/services/auth.dart';
-import 'package:wiredbrain/services/firestore.dart';
+import 'package:wiredbrain/services/services.dart';
 
 import '../coffee_router.dart';
 import 'home.dart';

@@ -1,7 +1,7 @@
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
-import 'package:wiredbrain/services/analytics.dart';
+import 'package:wiredbrain/services/services.dart';
 
 import 'coffee_router.dart';
 import './get_theme.dart';

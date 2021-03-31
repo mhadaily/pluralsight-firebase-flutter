@@ -5,8 +5,7 @@ import 'package:wiredbrain/helpers/helpers.dart';
 import 'package:wiredbrain/enums/enums.dart';
 import 'package:wiredbrain/models/models.dart';
 import 'package:wiredbrain/screens/menu.dart';
-import 'package:wiredbrain/services/auth.dart';
-import 'package:wiredbrain/services/firestore.dart';
+import 'package:wiredbrain/services/services.dart';
 import 'package:wiredbrain/widgets/button.dart';
 
 class CartScreen extends StatelessWidget {

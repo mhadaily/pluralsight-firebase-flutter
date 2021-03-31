@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:wiredbrain/api_path.dart';
 import 'package:wiredbrain/enums/enums.dart';
 import 'package:wiredbrain/models/models.dart';
-import '../api_path.dart';
 
 class FirestoreService {
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
