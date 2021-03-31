@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-enum CoffeeAddition { cake, icecream, cheese }
-
+enum CoffeeAddition {
+  cake,
+  icecream,
+  cheese,
+}
 
 extension CoffeeAdditionExtension on CoffeeAddition {
   IconData get iconData {

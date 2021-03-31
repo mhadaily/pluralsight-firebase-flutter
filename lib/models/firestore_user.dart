@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'role.dart';
+import 'package:wiredbrain/enums/enums.dart';
 
 part 'firestore_user.g.dart';
 

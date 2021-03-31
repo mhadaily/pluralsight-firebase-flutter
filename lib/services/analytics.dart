@@ -2,7 +2,7 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:firebase_analytics/observer.dart';
-import 'package:wiredbrain/models/role.dart';
+import 'package:wiredbrain/enums/enums.dart';
 
 class AnalyticsService {
   final FirebaseAnalytics _analytics = FirebaseAnalytics();

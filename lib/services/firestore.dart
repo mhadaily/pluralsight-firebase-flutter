@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:wiredbrain/models/activity.dart';
+import 'package:wiredbrain/enums/enums.dart';
 import 'package:wiredbrain/models/cart_item.dart';
 import 'package:wiredbrain/models/order.dart';
-import 'package:wiredbrain/models/order_status.dart';
-import 'package:wiredbrain/models/role.dart';
 import 'package:wiredbrain/models/user_log.dart';
 
 import '../models/coffee.dart';

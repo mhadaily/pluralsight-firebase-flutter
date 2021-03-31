@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wiredbrain/models/cup_size.dart';
+import 'package:wiredbrain/enums/enums.dart';
 
 class CoffeeSize extends StatelessWidget {
   CoffeeSize({

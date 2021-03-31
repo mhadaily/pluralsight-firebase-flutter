@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wiredbrain/models/additions.dart';
+import 'package:wiredbrain/enums/enums.dart';
 
 class CoffeeAdditions extends StatelessWidget {
   CoffeeAdditions({

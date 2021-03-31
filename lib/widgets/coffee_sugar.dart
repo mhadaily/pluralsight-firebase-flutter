@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wiredbrain/models/sugar_cube.dart';
+import 'package:wiredbrain/enums/enums.dart';
 
 class CoffeeSugar extends StatelessWidget {
   CoffeeSugar({

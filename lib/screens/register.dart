@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wiredbrain/models/role.dart';
+import 'package:wiredbrain/enums/enums.dart';
 import 'package:wiredbrain/services/analytics.dart';
 import 'package:wiredbrain/services/auth.dart';
 import 'package:wiredbrain/services/firestore.dart';

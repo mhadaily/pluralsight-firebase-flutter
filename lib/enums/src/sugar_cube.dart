@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
-enum CoffeeSugarCube { no, one, two }
+enum CoffeeSugarCube {
+  no,
+  one,
+  two,
+}
 
 extension CoffeeSugarCubeExtension on CoffeeSugarCube {
   IconData get iconData {

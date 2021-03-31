@@ -10,7 +10,7 @@ enum OrderStatus {
   canceled,
 }
 
-extension CoffeeCupSizeExtension on OrderStatus {
+extension OrderStatuseExtension on OrderStatus {
   String get name {
     return describeEnum(this);
   }

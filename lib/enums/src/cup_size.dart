@@ -1,4 +1,8 @@
-enum CoffeeCupSize { small, medium, large }
+enum CoffeeCupSize {
+  small,
+  medium,
+  large,
+}
 
 extension CoffeeCupSizeExtension on CoffeeCupSize {
   double get iconSize {

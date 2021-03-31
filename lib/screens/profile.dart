@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wiredbrain/coffee_router.dart';
-import 'package:wiredbrain/models/activity.dart';
+import 'package:wiredbrain/enums/enums.dart';
 import 'package:wiredbrain/screens/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

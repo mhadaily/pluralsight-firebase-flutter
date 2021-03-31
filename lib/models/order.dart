@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:wiredbrain/helpers/helpers.dart';
+import 'package:wiredbrain/enums/enums.dart';
 
 import 'cart_item.dart';
-import 'order_status.dart';
 
 part 'order.g.dart';
 

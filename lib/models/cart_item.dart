@@ -1,9 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:wiredbrain/helpers/helpers.dart';
-import 'package:wiredbrain/models/additions.dart';
+import 'package:wiredbrain/enums/enums.dart';
 import 'package:wiredbrain/models/coffee.dart';
-import 'package:wiredbrain/models/cup_size.dart';
-import 'package:wiredbrain/models/sugar_cube.dart';
 
 part 'cart_item.g.dart';
 

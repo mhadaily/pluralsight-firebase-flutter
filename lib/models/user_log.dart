@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-import 'activity.dart';
+import 'package:wiredbrain/enums/enums.dart';
 
 part 'user_log.g.dart';
 
