@@ -38,6 +38,7 @@ class AnalyticsService {
   Future<void> logPlaceOrder({
     required String orderId,
     required num total,
+    required List<String?> coffees,
     required int quantity,
   }) async {
     return _analytics.logEvent(
@@ -45,6 +46,7 @@ class AnalyticsService {
       parameters: {
         'quantity': quantity,
         'total': total,
+        'coffees': coffees.toString(),
         'orderId': orderId,
       },
     );

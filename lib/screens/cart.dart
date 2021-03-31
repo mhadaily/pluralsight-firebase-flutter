@@ -93,6 +93,7 @@ class CartScreen extends StatelessWidget {
 
                       await _analyticsService.logPlaceOrder(
                         orderId: orderId,
+                        coffees: items.map((item) => item.id).toList(),
                         total: cartTotal,
                         quantity: items.length,
                       );
