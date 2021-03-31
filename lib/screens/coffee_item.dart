@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wiredbrain/coffee_router.dart';
 import 'package:wiredbrain/constants.dart';
-import 'package:wiredbrain/models/coffee.dart';
+import 'package:wiredbrain/models/models.dart';
 import 'package:wiredbrain/screens/menu_detail.dart';
 import 'package:wiredbrain/services/firestore.dart';
 

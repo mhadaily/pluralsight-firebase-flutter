@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wiredbrain/screens/coffee_item.dart';
 import 'package:wiredbrain/services/firestore.dart';
 
-import '../models/coffee.dart';
+import '../models/models.dart';
 
 class MenuList extends StatefulWidget {
   static String routeName = 'MenuList';

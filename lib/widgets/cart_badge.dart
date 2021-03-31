@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wiredbrain/models/cart_item.dart';
+import 'package:wiredbrain/models/models.dart';
 import 'package:wiredbrain/services/auth.dart';
 import 'package:wiredbrain/services/firestore.dart';
 

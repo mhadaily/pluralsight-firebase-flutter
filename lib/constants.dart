@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'models/coffee.dart';
+import 'models/models.dart';
 
 final Color darkBrown = Color(0xFFA26E47);
 final Color lightBrown = Color(0xFFF9E8D4);

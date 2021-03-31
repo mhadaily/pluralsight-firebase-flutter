@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wiredbrain/constants.dart';
 import 'package:wiredbrain/enums/enums.dart';
-import 'package:wiredbrain/models/order.dart';
+import 'package:wiredbrain/models/models.dart';
 import 'package:wiredbrain/services/auth.dart';
 import 'package:wiredbrain/services/firestore.dart';
 
