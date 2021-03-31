@@ -49,7 +49,7 @@ class CartScreen extends StatelessWidget {
                         Animation<double> animation,
                       ) {
                         final CartItem item = items[index];
-                        
+
                         return Dismissible(
                           key: Key(item.id ?? '$index'),
                           background: Container(color: Colors.red[700]),
@@ -88,10 +88,11 @@ class CartScreen extends StatelessWidget {
                     text: 'Send Order',
                     highlighColor: true,
                     onPressed: () async {
-                      await _firestoreService.submitOrder(userId, items);
+                      final String orderId =
+                          await _firestoreService.submitOrder(userId, items);
 
                       await _analyticsService.logPlaceOrder(
-                        coffees: items.map((item) => item.coffee.id).toList(),
+                        orderId: orderId,
                         total: cartTotal,
                         quantity: items.length,
                       );

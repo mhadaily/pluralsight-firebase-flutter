@@ -159,7 +159,7 @@ class FirestoreService {
     );
   }
 
-  Future<void> submitOrder(String uid, List<CartItem> cartItems) async {
+  Future<String> submitOrder(String uid, List<CartItem> cartItems) async {
     final String ordersPath = ApiPath.orders;
     final CollectionReference orderCollection =
         _firebaseFirestore.collection(ordersPath);
@@ -173,7 +173,8 @@ class FirestoreService {
     );
 
     // place an order
-    await orderCollection.add(order.toJson());
+    final DocumentReference orderCreated =
+        await orderCollection.add(order.toJson());
 
     // clear user cart
     final String userCartPath = ApiPath.userCart(uid);
@@ -183,5 +184,7 @@ class FirestoreService {
     for (CartItem item in cartItems) {
       await cartCollection.doc(item.id).delete();
     }
+
+    return orderCreated.id;
   }
 }
