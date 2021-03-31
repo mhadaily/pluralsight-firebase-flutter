@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:wiredbrain/models/activity.dart';
 import 'package:wiredbrain/services/auth.dart';
+import 'package:wiredbrain/services/firestore.dart';
 
 import '../coffee_router.dart';
 import 'home.dart';
@@ -23,6 +25,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   final AuthService _authService = AuthService.instance;
+  final FirestoreService _firestoreService = FirestoreService.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +53,10 @@ class _SplashScreenState extends State<SplashScreen> {
       const Duration(milliseconds: 1000),
       () {
         if (_authService.currentUser != null) {
+          _firestoreService.addLog(
+            activity: Activity.login,
+            userId: _authService.currentUser!.uid,
+          );
           CoffeeRouter.instance.pushReplacement(MenuScreen.route());
         } else {
           CoffeeRouter.instance.pushReplacement(HomeScreen.route());

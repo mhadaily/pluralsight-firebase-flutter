@@ -1,12 +1,12 @@
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
-import 'package:wiredbrain/screens/shops.dart';
+import 'package:wiredbrain/screens/cart.dart';
 import 'package:wiredbrain/services/analytics.dart';
+import 'package:wiredbrain/widgets/cart_badge.dart';
 
 import 'profile.dart';
-import '../screens/support.dart';
-import '../constants.dart';
+import 'orders.dart';
 import './menu_list.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -26,9 +26,9 @@ class _MenuScreenState extends State<MenuScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> tabs = [
-    MenuList(coffees: coffees),
-    ShopsScreen(),
-    SupportScreen(),
+    MenuList(),
+    CartScreen(),
+    OrdersScreen(),
     ProfileScreen(),
   ];
 
@@ -54,9 +54,22 @@ class _MenuScreenState extends State<MenuScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         title: Text("Welcome to the WiredBrain"),
-        centerTitle: true,
+        centerTitle: false,
+        actions: [
+          CartBadge(
+            top: 8,
+            right: 10,
+            child: IconButton(
+              icon: Icon(Icons.shopping_cart),
+              onPressed: () {
+                setState(() {
+                  _selectedIndex = 1;
+                });
+              },
+            ),
+          ),
+        ],
       ),
       body: tabs[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -69,12 +82,12 @@ class _MenuScreenState extends State<MenuScreen> {
             label: "Menu",
           ),
           const BottomNavigationBarItem(
-            icon: Icon(Icons.location_on),
-            label: "Shops",
+            icon: Icon(Icons.shopping_cart),
+            label: "Cart",
           ),
           const BottomNavigationBarItem(
-            icon: Icon(Icons.local_drink),
-            label: "Support",
+            icon: Icon(Icons.list),
+            label: "Orders",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

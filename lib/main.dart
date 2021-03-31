@@ -8,7 +8,7 @@ import 'coffee_app.dart';
 
 bool get isInDebugMode {
   bool inDebugMode = false;
-  // assert(inDebugMode = true);
+  assert(inDebugMode = true);
   return inDebugMode;
 }
 

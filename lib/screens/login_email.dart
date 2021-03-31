@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wiredbrain/models/role.dart';
 import 'package:wiredbrain/screens/forgot_password.dart';
 import 'package:wiredbrain/services/analytics.dart';
 import 'package:wiredbrain/services/auth.dart';
@@ -126,7 +127,7 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
 
         _analyticsService.setUserProperties(
           userId: user.uid,
-          userRole: 'customer',
+          userRoles: [UserRole.customer],
         );
 
         CoffeeRouter.instance.push(MenuScreen.route());

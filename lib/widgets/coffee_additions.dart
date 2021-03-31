@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:wiredbrain/models/additions.dart';
 
-enum CoffeeAdditionals { cake, icecream, cheese }
+class CoffeeAdditions extends StatelessWidget {
+  CoffeeAdditions({
+    Key? key,
+    required this.additions,
+    required this.onPressed,
+  }) : super(key: key);
 
-class CoffeeAdditions extends StatefulWidget {
-  CoffeeAdditions({Key? key}) : super(key: key);
-
-  @override
-  _CoffeeAdditionsState createState() => _CoffeeAdditionsState();
-}
-
-class _CoffeeAdditionsState extends State<CoffeeAdditions> {
-  List<CoffeeAdditionals> additions = [CoffeeAdditionals.cake];
+  final List<CoffeeAddition> additions;
+  final Function(List<CoffeeAddition>) onPressed;
 
   get hasCake {
-    return additions.contains(CoffeeAdditionals.cake);
+    return additions.contains(CoffeeAddition.cake);
   }
 
   get hasIceCream {
-    return additions.contains(CoffeeAdditionals.icecream);
+    return additions.contains(CoffeeAddition.icecream);
   }
 
   get hasCheese {
-    return additions.contains(CoffeeAdditionals.cheese);
+    return additions.contains(CoffeeAddition.cheese);
   }
 
   @override
@@ -39,29 +37,29 @@ class _CoffeeAdditionsState extends State<CoffeeAdditions> {
         SizedBox(width: 14),
         IconButton(
           icon: Icon(
-            Icons.cake,
+            CoffeeAddition.cake.iconData,
             color: getColor(hasCake),
           ),
           onPressed: () {
-            toggle(hasCake, CoffeeAdditionals.cake);
+            toggle(hasCake, CoffeeAddition.cake);
           },
         ),
         IconButton(
           icon: Icon(
-            FontAwesomeIcons.iceCream,
-            color: getColor(additions.contains(CoffeeAdditionals.icecream)),
+            CoffeeAddition.icecream.iconData,
+            color: getColor(additions.contains(CoffeeAddition.icecream)),
           ),
           onPressed: () {
-            toggle(hasIceCream, CoffeeAdditionals.icecream);
+            toggle(hasIceCream, CoffeeAddition.icecream);
           },
         ),
         IconButton(
           icon: Icon(
-            FontAwesomeIcons.cheese,
-            color: getColor(additions.contains(CoffeeAdditionals.cheese)),
+            CoffeeAddition.cheese.iconData,
+            color: getColor(additions.contains(CoffeeAddition.cheese)),
           ),
           onPressed: () {
-            toggle(hasCheese, CoffeeAdditionals.cheese);
+            toggle(hasCheese, CoffeeAddition.cheese);
           },
         ),
       ],
@@ -72,15 +70,13 @@ class _CoffeeAdditionsState extends State<CoffeeAdditions> {
     return isSelected ? Colors.brown.shade800 : Colors.grey.shade400;
   }
 
-  toggle(bool selected, CoffeeAdditionals addition) {
+  toggle(bool selected, CoffeeAddition addition) {
     if (selected) {
-      setState(() {
-        additions.remove(addition);
-      });
+      final newList = additions.where((item) => item != addition).toList();
+      onPressed(newList);
     } else {
-      setState(() {
-        additions.add(addition);
-      });
+      final newList = [...additions, addition];
+      onPressed(newList);
     }
   }
 }

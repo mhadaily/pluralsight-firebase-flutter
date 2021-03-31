@@ -4,6 +4,7 @@ import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:wiredbrain/services/firestore.dart';
 import 'package:wiredbrain/widgets/alert_dialog.dart';
 
 class AuthService {
@@ -60,8 +61,8 @@ class AuthService {
     return _firebaseAuth.sendPasswordResetEmail(email: email);
   }
 
-  Future<void>? deleteUser() {
-    return currentUser?.delete();
+  Future<void>? deleteUser() async {
+    await currentUser?.delete();
   }
 
   Future<void>? updatePassword({

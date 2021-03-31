@@ -2,6 +2,7 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:firebase_analytics/observer.dart';
+import 'package:wiredbrain/models/role.dart';
 
 class AnalyticsService {
   final FirebaseAnalytics _analytics = FirebaseAnalytics();
@@ -22,12 +23,13 @@ class AnalyticsService {
 
   Future<void> setUserProperties({
     required String userId,
-    required String userRole,
+    required List<UserRole> userRoles,
   }) async {
     await _analytics.setUserId(userId);
     await _analytics.setUserProperty(
       name: 'user_role', // custom userProperty
-      value: userRole,
+      value:
+          userRoles.contains(UserRole.customer) ? "customer" : 'adminOrUnknown',
     );
   }
 

@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:wiredbrain/models/cup_size.dart';
 
-enum CoffeeCupSize { small, medium, large }
-
-class CoffeeSize extends StatefulWidget {
+class CoffeeSize extends StatelessWidget {
   CoffeeSize({
     Key? key,
-    this.icon,
+    required this.icon,
+    required this.size,
+    required this.onPressed,
   }) : super(key: key);
 
-  final IconData? icon;
-
-  @override
-  _CoffeeSizeState createState() => _CoffeeSizeState();
-}
-
-class _CoffeeSizeState extends State<CoffeeSize> {
-  CoffeeCupSize size = CoffeeCupSize.medium;
+  final IconData icon;
+  final CoffeeCupSize size;
+  final Function(CoffeeCupSize) onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -31,37 +27,32 @@ class _CoffeeSizeState extends State<CoffeeSize> {
         SizedBox(width: 50),
         IconButton(
           icon: Icon(
-            widget.icon,
+            icon,
             color: getColor(size == CoffeeCupSize.small),
+            size: CoffeeCupSize.small.iconSize,
           ),
           onPressed: () {
-            setState(() {
-              size = CoffeeCupSize.small;
-            });
+            onPressed(CoffeeCupSize.small);
           },
         ),
         IconButton(
           icon: Icon(
-            widget.icon,
+            icon,
             color: getColor(size == CoffeeCupSize.medium),
-            size: 30,
+            size: CoffeeCupSize.medium.iconSize,
           ),
           onPressed: () {
-            setState(() {
-              size = CoffeeCupSize.medium;
-            });
+            onPressed(CoffeeCupSize.medium);
           },
         ),
         IconButton(
           icon: Icon(
-            widget.icon,
+            icon,
             color: getColor(size == CoffeeCupSize.large),
-            size: 36,
+            size: CoffeeCupSize.large.iconSize,
           ),
           onPressed: () {
-            setState(() {
-              size = CoffeeCupSize.large;
-            });
+            onPressed(CoffeeCupSize.large);
           },
         ),
       ],

@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:wiredbrain/models/role.dart';
 import 'package:wiredbrain/services/analytics.dart';
 import 'package:wiredbrain/services/auth.dart';
+import 'package:wiredbrain/services/firestore.dart';
 import 'package:wiredbrain/widgets/loading_snack_bar.dart';
 import '../widgets/button.dart';
 import '../widgets/login_inputs.dart';
@@ -24,6 +26,7 @@ class RegisterScreen extends StatelessWidget {
 
   final AnalyticsService _analyticsService = AnalyticsService.instance;
   final AuthService _authService = AuthService.instance;
+  final FirestoreService _firestoreService = FirestoreService.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -89,8 +92,10 @@ class RegisterScreen extends StatelessWidget {
 
         _analyticsService.setUserProperties(
           userId: user.uid,
-          userRole: 'customer',
+          userRoles: [UserRole.customer],
         );
+
+        await _firestoreService.createUser(user.uid, [UserRole.customer]);
 
         CoffeeRouter.instance.pushAndRemoveUntil(MenuScreen.route());
       }

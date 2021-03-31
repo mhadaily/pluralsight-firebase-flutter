@@ -1,11 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wiredbrain/coffee_router.dart';
+import 'package:wiredbrain/models/activity.dart';
 import 'package:wiredbrain/screens/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wiredbrain/services/analytics.dart';
 import 'package:wiredbrain/services/auth.dart';
+import 'package:wiredbrain/services/firestore.dart';
 import 'package:wiredbrain/widgets/button.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -20,6 +22,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   final AnalyticsService _analyticsService = AnalyticsService.instance;
   final AuthService _authService = AuthService.instance;
+  final FirestoreService _firestoreService = FirestoreService.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +73,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: CommonButton(
                 onPressed: () async {
+                  await _firestoreService.addLog(
+                    activity: Activity.logout,
+                    userId: _authService.currentUser!.uid,
+                  );
                   await _analyticsService.logLogoutPressed();
                   await _authService.signOut();
                   CoffeeRouter.instance.pushAndRemoveUntil(HomeScreen.route());

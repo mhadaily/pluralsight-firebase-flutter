@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:wiredbrain/models/sugar_cube.dart';
 
-enum CoffeeSugerCube { no, one, two }
+class CoffeeSugar extends StatelessWidget {
+  CoffeeSugar({
+    Key? key,
+    required this.sugar,
+    required this.onPressed,
+  }) : super(key: key);
 
-class CoffeeSugar extends StatefulWidget {
-  CoffeeSugar({Key? key}) : super(key: key);
-
-  @override
-  _CoffeeSugarState createState() => _CoffeeSugarState();
-}
-
-class _CoffeeSugarState extends State<CoffeeSugar> {
-  CoffeeSugerCube suger = CoffeeSugerCube.no;
+  final CoffeeSugarCube sugar;
+  final Function(CoffeeSugarCube) onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -26,45 +25,39 @@ class _CoffeeSugarState extends State<CoffeeSugar> {
         SizedBox(width: 40),
         IconButton(
           icon: Icon(
-            Icons.close,
-            color: getColor(suger == CoffeeSugerCube.no),
+            CoffeeSugarCube.no.iconData,
+            color: getColor(sugar == CoffeeSugarCube.no),
           ),
           onPressed: () {
-            setState(() {
-              suger = CoffeeSugerCube.no;
-            });
+            onPressed(CoffeeSugarCube.no);
           },
         ),
         IconButton(
           icon: Icon(
-            Icons.check_box_outline_blank,
-            color: getColor(suger == CoffeeSugerCube.one),
+            CoffeeSugarCube.one.iconData,
+            color: getColor(sugar == CoffeeSugarCube.one),
           ),
           onPressed: () {
-            setState(() {
-              suger = CoffeeSugerCube.one;
-            });
+            onPressed(CoffeeSugarCube.one);
           },
         ),
         IconButton(
           icon: Row(
             children: <Widget>[
               Icon(
-                Icons.check_box_outline_blank,
-                color: getColor(suger == CoffeeSugerCube.two),
+                CoffeeSugarCube.two.iconData,
+                color: getColor(sugar == CoffeeSugarCube.two),
               ),
               Flexible(
                 child: Icon(
-                  Icons.check_box_outline_blank,
-                  color: getColor(suger == CoffeeSugerCube.two),
+                  CoffeeSugarCube.two.iconData,
+                  color: getColor(sugar == CoffeeSugarCube.two),
                 ),
               ),
             ],
           ),
           onPressed: () {
-            setState(() {
-              suger = CoffeeSugerCube.two;
-            });
+            onPressed(CoffeeSugarCube.two);
           },
         ),
       ],
