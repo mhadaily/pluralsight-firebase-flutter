@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wiredbrain/helpers/validators.dart';
+import 'package:wiredbrain/helpers/helpers.dart';
 import 'package:wiredbrain/screens/home.dart';
 import 'package:wiredbrain/services/auth.dart';
 import 'package:wiredbrain/widgets/loading_snack_bar.dart';
