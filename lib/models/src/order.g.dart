@@ -14,8 +14,8 @@ Order _$OrderFromJson(Map<String, dynamic> json) {
     id: json['id'] as String?,
     status: _$enumDecode(_$OrderStatusEnumMap, json['status']),
     userId: json['userId'] as String,
-    created: Order._fromJson(json['created'] as Timestamp),
-    updated: Order._fromJson(json['updated'] as Timestamp),
+    created: Order._fromJson(json['created']),
+    updated: Order._fromJson(json['updated']),
   );
 }
 

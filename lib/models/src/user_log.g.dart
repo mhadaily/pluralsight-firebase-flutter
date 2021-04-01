@@ -10,7 +10,7 @@ UserLog _$UserLogFromJson(Map<String, dynamic> json) {
   return UserLog(
     id: json['id'] as String?,
     activity: _$enumDecode(_$ActivityEnumMap, json['activity']),
-    created: UserLog._fromJson(json['created'] as Timestamp),
+    created: UserLog._fromJson(json['created']),
     userId: json['userId'] as String,
   );
 }

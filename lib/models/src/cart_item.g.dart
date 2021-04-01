@@ -11,7 +11,7 @@ CartItem _$CartItemFromJson(Map<String, dynamic> json) {
     id: json['id'] as String?,
     coffee: Coffee.fromJson(json['coffee'] as Map<String, dynamic>),
     size: _$enumDecode(_$CoffeeCupSizeEnumMap, json['size']),
-    quantity: json['count'] as int,
+    quantity: json['quantity'] as int,
     sugar: _$enumDecode(_$CoffeeSugarCubeEnumMap, json['sugar']),
     additions: (json['additions'] as List<dynamic>)
         .map((e) => _$enumDecode(_$CoffeeAdditionEnumMap, e))
@@ -24,7 +24,7 @@ Map<String, dynamic> _$CartItemToJson(CartItem instance) => <String, dynamic>{
       'coffee': instance.coffee.toJson(),
       'size': _$CoffeeCupSizeEnumMap[instance.size],
       'sugar': _$CoffeeSugarCubeEnumMap[instance.sugar],
-      'count': instance.quantity,
+      'quantity': instance.quantity,
       'additions':
           instance.additions.map((e) => _$CoffeeAdditionEnumMap[e]).toList(),
     };
