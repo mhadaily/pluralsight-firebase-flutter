@@ -22,8 +22,8 @@ class FirestoreService {
     await document.delete();
   }
 
-  Stream<List<CartItem>> getUserCart(String uid) {
-    final path = ApiPath.userCart(uid);
+  Stream<List<CartItem>> getUserCart(String userId) {
+    final path = ApiPath.userCart(userId);
     final CollectionReference collection = _firebaseFirestore.collection(path);
 
     return collection.snapshots().map(
@@ -163,7 +163,6 @@ class FirestoreService {
     final String ordersPath = ApiPath.orders;
     final CollectionReference orderCollection =
         _firebaseFirestore.collection(ordersPath);
-
     final order = Order(
       items: cartItems,
       userId: uid,
@@ -171,11 +170,9 @@ class FirestoreService {
       created: DateTime.now(),
       updated: DateTime.now(),
     );
-
     // place an order
     final DocumentReference orderCreated =
         await orderCollection.add(order.toJson());
-
     // clear user cart
     final String userCartPath = ApiPath.userCart(uid);
     final CollectionReference cartCollection =
@@ -184,7 +181,6 @@ class FirestoreService {
     for (CartItem item in cartItems) {
       await cartCollection.doc(item.id).delete();
     }
-
     return orderCreated.id;
   }
 }

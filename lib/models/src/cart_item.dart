@@ -3,7 +3,6 @@ import 'package:wiredbrain/helpers/helpers.dart';
 import 'package:wiredbrain/enums/enums.dart';
 
 import 'coffee.dart';
-
 part 'cart_item.g.dart';
 
 @JsonSerializable(explicitToJson: true)
@@ -17,7 +16,15 @@ class CartItem {
     required this.additions,
   });
 
-  num get total => getCartItemsTotal(
+  // firebase document ID
+  final String? id;
+  final Coffee coffee;
+  final CoffeeCupSize size;
+  final CoffeeSugarCube sugar;
+  final int quantity;
+  final List<CoffeeAddition> additions;
+
+  num get total => getCartItemTotal(
         count: quantity,
         price: coffee.price,
         additions: additions.length,
@@ -25,16 +32,6 @@ class CartItem {
         sugar: sugar.index,
       );
 
-  final String? id;
-
-  final Coffee coffee;
-
-  final CoffeeCupSize size;
-  final CoffeeSugarCube sugar;
-  final int quantity;
-  final List<CoffeeAddition> additions;
-
-  factory CartItem.fromJson(Map<String, dynamic> json) =>
-      _$CartItemFromJson(json);
+  factory CartItem.fromJson(Map<String, dynamic> json) => _$CartItemFromJson(json);
   Map<String, dynamic> toJson() => _$CartItemToJson(this);
 }

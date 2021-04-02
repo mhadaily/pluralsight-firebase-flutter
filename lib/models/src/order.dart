@@ -18,23 +18,10 @@ class Order {
     required this.updated,
   });
 
-  num get total => items
-      .map(
-        (item) => getCartItemsTotal(
-          count: item.quantity,
-          price: item.coffee.price,
-          additions: item.additions.length,
-          size: item.size.index,
-          sugar: item.sugar.index,
-        ),
-      )
-      .reduce((value, element) => value + element);
-
   final List<CartItem> items;
   final OrderStatus status;
   // order id
   final String? id;
-
   // user id
   final String userId;
 
@@ -45,6 +32,18 @@ class Order {
   final DateTime updated;
 
   bool get isReady => status == OrderStatus.ready;
+
+  num get total => items
+      .map(
+        (item) => getCartItemTotal(
+          count: item.quantity,
+          price: item.coffee.price,
+          additions: item.additions.length,
+          size: item.size.index,
+          sugar: item.sugar.index,
+        ),
+      )
+      .reduce((value, element) => value + element);
 
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
   Map<String, dynamic> toJson() => _$OrderToJson(this);

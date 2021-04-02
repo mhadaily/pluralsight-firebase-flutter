@@ -169,7 +169,7 @@ class _MenuDetailsState extends State<MenuDetails> {
   }
 
   num total(price) {
-    return getCartItemsTotal(
+    return getCartItemTotal(
       count: quantity,
       price: price,
       additions: additions.length,

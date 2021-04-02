@@ -1,4 +1,4 @@
-num getCartItemsTotal({
+num getCartItemTotal({
   required int count,
   required num price,
   required int additions,
