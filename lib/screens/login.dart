@@ -45,11 +45,12 @@ class _LoginScreenState extends State<LoginScreen> {
           user.providerData.forEach((provider) {
             _analyticsService.logLogin(loginMethod: provider.providerId);
           });
-
           _analyticsService.setUserProperties(
             userId: user.uid,
             userRoles: [UserRole.customer],
           );
+
+          _firestoreService.setUserLastLoginTimestamp(user.uid);
 
           await _firestoreService.addLog(
             activity: Activity.login,

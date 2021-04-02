@@ -108,6 +108,47 @@ class FirestoreService {
     return FirestoreUser.fromJson(json);
   }
 
+  Future<void> setUserLastLoginTimestamp(String userId) async {
+    try {
+      final String path = ApiPath.user(userId);
+      final DocumentReference document = _firebaseFirestore.doc(path);
+
+      // If no document exists yet, the update will fail.
+      // await document.update({
+      //   'lastLogin': FieldValue.serverTimestamp(),
+      // });
+
+      /// If no document exists yet, it will be created!.
+      await document.set(
+        {
+          'lastLogin': FieldValue.serverTimestamp(),
+        },
+        SetOptions(merge: true),
+      );
+    } catch (e) {
+      print('Create User Error!');
+      // log in error reporting system like crashlytics
+      // Handle errors gracefully as we did in module 3
+    }
+  }
+
+  Future<void> setUserRoles(String userId, List<UserRole> roles) async {
+    try {
+      final String path = ApiPath.user(userId);
+      final DocumentReference document = _firebaseFirestore.doc(path);
+      await document.set(
+        {
+          'roles': roles.map((role) => role.name).toList(),
+        },
+        SetOptions(merge: true),
+      );
+    } catch (e) {
+      print('Create User Error!');
+      // log in error reporting system like crashlytics
+      // Handle errors gracefully as we did in module 3
+    }
+  }
+
   Future<void> createUser(String uid, List<UserRole> roles) async {
     try {
       final String path = ApiPath.users;

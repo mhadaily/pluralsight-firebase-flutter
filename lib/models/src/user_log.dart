@@ -3,7 +3,6 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:wiredbrain/enums/enums.dart';
 
 part 'user_log.g.dart';
-
 @JsonSerializable(explicitToJson: true)
 class UserLog {
   UserLog({
@@ -12,7 +11,6 @@ class UserLog {
     required this.created,
     required this.userId,
   });
-
   final Activity activity;
 
   @JsonKey(fromJson: _fromJson, toJson: _toJson)
