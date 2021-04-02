@@ -7,4 +7,7 @@ class ApiPath {
   static String userCartItem(String uid, String cid) => 'Users/$uid/Cart/$cid';
   static String get orders => 'Orders';
   static String get logs => 'Logs';
+  static String userTokens(String uid) => 'Users/$uid/Tokens';
+  static String userToken(String uid, String tokenId) =>
+      'Users/$uid/Tokens/$tokenId';
 }

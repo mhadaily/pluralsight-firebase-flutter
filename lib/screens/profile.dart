@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:wiredbrain/coffee_router.dart';
 import 'package:wiredbrain/enums/enums.dart';
 import 'package:wiredbrain/screens/home.dart';
@@ -21,6 +22,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final AnalyticsService _analyticsService = AnalyticsService.instance;
   final AuthService _authService = AuthService.instance;
   final FirestoreService _firestoreService = FirestoreService.instance;
+  final MessagingService _messagingService = MessagingService.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -67,12 +69,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   user.sendEmailVerification();
                 },
               ),
+            // if (_messagingService.userDeviceToken != null)
+            //   CommonButton(
+            //     text: 'Subscribe to new coffee',
+            //     onPressed: () async {
+            //       await _messagingService.subscribeToTopic('Coffees');
+            //     },
+            //   ),
+            // if (_messagingService.userDeviceToken != null)
+            //   CommonButton(
+            //     text: 'Unsubscribe from new coffee',
+            //     onPressed: () async {
+            //       await _messagingService.unsubscribeToTopic('Coffees');
+            //     },
+            //   ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: CommonButton(
                 onPressed: () async {
                   await _firestoreService.addLog(
                     activity: Activity.logout,
+                    userId: _authService.currentUser!.uid,
+                  );
+                  await _firestoreService.deleteUserToken(
+                    token: _messagingService.userDeviceToken,
                     userId: _authService.currentUser!.uid,
                   );
                   await _analyticsService.logLogoutPressed();

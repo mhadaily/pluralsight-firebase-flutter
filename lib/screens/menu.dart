@@ -32,6 +32,15 @@ class _MenuScreenState extends State<MenuScreen> {
   ];
 
   final FirebaseAnalyticsObserver observer = AnalyticsService.observer;
+  final AuthService _authService = AuthService.instance;
+  final FirestoreService _firestoreService = FirestoreService.instance;
+  final MessagingService _messagingService = MessagingService.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    setupMessaging();
+  }
 
   void _sendCurrentTabToAnalytics() {
     final String screeName = '${MenuScreen.routeName}/tab$_selectedIndex';
@@ -97,6 +106,14 @@ class _MenuScreenState extends State<MenuScreen> {
         selectedItemColor: Colors.brown.shade800,
         onTap: _onItemTapped,
       ),
+    );
+  }
+
+  Future<void> setupMessaging() async {
+    await _messagingService.initialize();
+    await _firestoreService.registerUserToken(
+      token: _messagingService.userDeviceToken,
+      userId: _authService.currentUser!.uid,
     );
   }
 }

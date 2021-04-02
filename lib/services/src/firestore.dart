@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:wiredbrain/api_path.dart';
 import 'package:wiredbrain/enums/enums.dart';
@@ -12,6 +14,34 @@ class FirestoreService {
   factory FirestoreService() => _service;
 
   static FirestoreService get instance => _service;
+
+  Future<void> registerUserToken({
+    required String token,
+    required String userId,
+  }) async {
+    final path = ApiPath.userTokens(userId);
+    final DocumentReference doc =
+        _firebaseFirestore.collection(path).doc(token);
+
+    doc.set(
+      {
+        'token': token,
+        'platform': Platform.operatingSystem,
+        'created': FieldValue.serverTimestamp(),
+      },
+    );
+  }
+
+  Future<void> deleteUserToken({
+    required String token,
+    required String userId,
+  }) async {
+    final path = ApiPath.userToken(userId, token);
+
+    final DocumentReference doc = _firebaseFirestore.doc(path);
+
+    doc.delete();
+  }
 
   Future<void> deleteUserCartItem({
     required String userId,
