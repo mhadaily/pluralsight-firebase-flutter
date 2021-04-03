@@ -11,11 +11,6 @@ class MessagingService {
 
   static MessagingService get instance => _service;
 
-  Future<bool> isPremissionEnabled(AuthorizationStatus status) async {
-    final settings = await _firebaseMessaging.getNotificationSettings();
-    return settings.authorizationStatus == status;
-  }
-
   Future<void> initialize() async {
     final NotificationSettings settings = await _requestPermission();
 
@@ -31,6 +26,11 @@ class MessagingService {
 
   Future<void> unsubscribeToTopic(String topic) {
     return _firebaseMessaging.unsubscribeFromTopic(topic);
+  }
+
+  Future<bool> isPremissionEnabled(AuthorizationStatus status) async {
+    final settings = await _firebaseMessaging.getNotificationSettings();
+    return settings.authorizationStatus == status;
   }
 
   Future<NotificationSettings> _requestPermission() async {
