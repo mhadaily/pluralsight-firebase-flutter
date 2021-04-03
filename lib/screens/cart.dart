@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:wiredbrain/coffee_router.dart';
+import 'package:wiredbrain/enums/enums.dart';
 import 'package:wiredbrain/models/models.dart';
 import 'package:wiredbrain/screens/menu.dart';
 import 'package:wiredbrain/services/services.dart';
+import 'package:wiredbrain/services/src/in_app_messaging.dart';
 import 'package:wiredbrain/widgets/widgets.dart';
 
 class CartScreen extends StatelessWidget {
@@ -12,6 +14,7 @@ class CartScreen extends StatelessWidget {
   final FirestoreService _firestoreService = FirestoreService.instance;
   final AuthService _authService = AuthService.instance;
   final AnalyticsService _analyticsService = AnalyticsService.instance;
+  final InAppMessagingService _fipm = InAppMessagingService.instance;
 
   @override
   Widget build(BuildContext context) {
