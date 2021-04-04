@@ -1,6 +1,5 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-import { QueryDocumentSnapshot } from 'firebase-functions/lib/providers/firestore';
 
 admin.initializeApp();
 
@@ -11,8 +10,8 @@ const messaging = admin.messaging();
 export const sentToUserWhenOrderIsReady = functions.firestore
   .document('/Orders/{orderId}')
   .onUpdate(async (change, context) => {
-    // Get an object representing the document
-    const doc: QueryDocumentSnapshot = change.after;
+    // Get an object representing the document [DocumentReference In Dart]
+    const doc = change.after;
     const newValue = doc.data();
 
     // ...or the previous value before this update
