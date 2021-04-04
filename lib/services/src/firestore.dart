@@ -22,7 +22,6 @@ class FirestoreService {
     final path = ApiPath.userTokens(userId);
     final DocumentReference doc =
         _firebaseFirestore.collection(path).doc(token);
-
     doc.set(
       {
         'token': token,
@@ -31,7 +30,6 @@ class FirestoreService {
       },
     );
   }
-
   Future<void> deleteUserToken({
     required String token,
     required String userId,
