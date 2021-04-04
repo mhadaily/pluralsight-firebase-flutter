@@ -69,20 +69,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   user.sendEmailVerification();
                 },
               ),
-            // if (_messagingService.userDeviceToken != null)
-            //   CommonButton(
-            //     text: 'Subscribe to new coffee',
-            //     onPressed: () async {
-            //       await _messagingService.subscribeToTopic('Coffees');
-            //     },
-            //   ),
-            // if (_messagingService.userDeviceToken != null)
-            //   CommonButton(
-            //     text: 'Unsubscribe from new coffee',
-            //     onPressed: () async {
-            //       await _messagingService.unsubscribeToTopic('Coffees');
-            //     },
-            //   ),
+            if (_messagingService.userDeviceToken != null)
+              CommonButton(
+                text: 'Subscribe coffee newsletter',
+                onPressed: () async {
+                  await _messagingService.subscribeToTopic('Coffees');
+                },
+              ),
+            if (_messagingService.userDeviceToken != null)
+              CommonButton(
+                text: 'Unsubscribe coffee newsletter',
+                onPressed: () async {
+                  await _messagingService.unsubscribeFromTopic('Coffees');
+                },
+              ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: CommonButton(

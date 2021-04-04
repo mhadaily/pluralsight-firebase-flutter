@@ -1,5 +1,6 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
+import { QueryDocumentSnapshot } from 'firebase-functions/lib/providers/firestore';
 
 admin.initializeApp();
 
@@ -11,7 +12,9 @@ export const sentToUserWhenOrderIsReady = functions.firestore
   .document('/Orders/{orderId}')
   .onUpdate(async (change, context) => {
     // Get an object representing the document
-    const newValue = change.after.data();
+    const doc: QueryDocumentSnapshot = change.after;
+    const newValue = doc.data();
+
     // ...or the previous value before this update
     // const previousValue = change.before.data();
 
@@ -28,9 +31,10 @@ export const sentToUserWhenOrderIsReady = functions.firestore
         messaging.sendToDevice(tokens, {
           notification: {
             title: 'Your Order is ready',
-            body: `Dear ${
-              user.displayName || 'customer'
-            }, you may pickup your order now. thank you!`,
+            body: `Dear ${user.displayName || 'customer'}, 
+            you may pickup your order ${doc.id} now. Thank you!`,
+            icon:
+              'https://firebasestorage.googleapis.com/v0/b/wiredbrain-15518.appspot.com/o/FCMImages%2Flogo.png?alt=media&token=34270b69-f4ae-4e7d-aefe-0ad10883a609',
           },
         });
       } else {

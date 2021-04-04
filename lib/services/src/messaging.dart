@@ -24,7 +24,7 @@ class MessagingService {
     return _firebaseMessaging.subscribeToTopic(topic);
   }
 
-  Future<void> unsubscribeToTopic(String topic) {
+  Future<void> unsubscribeFromTopic(String topic) {
     return _firebaseMessaging.unsubscribeFromTopic(topic);
   }
 
