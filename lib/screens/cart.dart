@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wiredbrain/coffee_router.dart';
-import 'package:wiredbrain/enums/enums.dart';
 import 'package:wiredbrain/models/models.dart';
 import 'package:wiredbrain/screens/menu.dart';
 import 'package:wiredbrain/services/services.dart';
@@ -62,6 +61,10 @@ class CartScreen extends StatelessWidget {
                               index,
                               (context, animation) => SizedBox(),
                             );
+
+                            if (items.isEmpty) {
+                              _fipm.triggerEvent('remove_and_empty_basket');
+                            }
                           },
                           direction: DismissDirection.endToStart,
                           child: TextButton(
