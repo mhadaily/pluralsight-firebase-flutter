@@ -91,6 +91,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     activity: Activity.logout,
                     userId: _authService.currentUser!.uid,
                   );
+                  print(_messagingService.userDeviceToken);
                   await _firestoreService.deleteUserToken(
                     token: _messagingService.userDeviceToken,
                     userId: _authService.currentUser!.uid,

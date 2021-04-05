@@ -23,6 +23,10 @@ class CartScreen extends StatelessWidget {
       stream: _firestoreService.getUserCart(userId),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
+          if (snapshot.hasError) {
+            return NoItems();
+          }
+
           if (snapshot.hasData) {
             final List<CartItem> items = snapshot.data ?? [];
 
@@ -53,6 +57,13 @@ class CartScreen extends StatelessWidget {
                           key: Key(item.id ?? '$index'),
                           background: Container(color: Colors.red[700]),
                           onDismissed: (direction) {
+                            if (items.length == 1) {
+                              _fipm.triggerEvent('remove_and_empty_basket');
+                            }
+                            // _analyticsService.logRemoveItem(
+                            //   itemId: item.coffee.id,
+                            //   itemName: item.coffee.name,
+                            // );
                             _firestoreService.deleteUserCartItem(
                               userId: userId,
                               cartId: item.id!,
@@ -61,10 +72,6 @@ class CartScreen extends StatelessWidget {
                               index,
                               (context, animation) => SizedBox(),
                             );
-
-                            if (items.isEmpty) {
-                              _fipm.triggerEvent('remove_and_empty_basket');
-                            }
                           },
                           direction: DismissDirection.endToStart,
                           child: TextButton(

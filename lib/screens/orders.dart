@@ -16,7 +16,9 @@ class OrdersScreen extends StatelessWidget {
     return StreamBuilder<List<Order>>(
       stream: _firestoreService.getUserOrders(_authService.currentUser!.uid),
       builder: (context, AsyncSnapshot<List<Order>> snapshot) {
-        print(snapshot);
+        if (snapshot.hasError) {
+          return NoItems(title: 'No Orders!');
+        }
         if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {
             final orders = snapshot.data!;

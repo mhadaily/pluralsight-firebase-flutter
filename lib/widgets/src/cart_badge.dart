@@ -28,6 +28,7 @@ class CartBadge extends StatelessWidget {
           if (snapshot.hasError) {
             print(snapshot.error);
             print('Error!');
+            return SizedBox();
           }
 
           if (snapshot.connectionState == ConnectionState.active) {

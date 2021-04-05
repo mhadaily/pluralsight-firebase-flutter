@@ -21,6 +21,11 @@ class CoffeeItem extends StatelessWidget {
     return StreamBuilder<Coffee>(
       stream: _firestoreService.getCoffee(coffee.id),
       builder: (context, AsyncSnapshot<Coffee> snapshot) {
+        if (snapshot.hasError) {
+          print(snapshot.error);
+          return SizedBox();
+        }
+
         Coffee newCoffee = coffee;
 
         if (snapshot.hasData) {

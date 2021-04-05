@@ -67,9 +67,23 @@ class AnalyticsService {
   Future<void> logLogoutPressed({
     bool isBasketEmpty = true,
   }) async {
+    print('logout_pressed');
     return _analytics.logEvent(
       name: 'logout_pressed',
       parameters: {'is_basket_empty': isBasketEmpty},
+    );
+  }
+
+  Future<void> logRemoveItem({
+    required String itemId,
+    required String itemName,
+  }) async {
+    return _analytics.logEvent(
+      name: 'remove_and_empty_basket',
+      parameters: {
+        'itemId': itemId,
+        'itemName': itemName,
+      },
     );
   }
 }

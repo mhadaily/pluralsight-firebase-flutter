@@ -45,6 +45,9 @@ class _MenuDetailsState extends State<MenuDetails> {
     return StreamBuilder<Coffee>(
       stream: _firestoreService.getCoffee(widget.id),
       builder: (context, AsyncSnapshot<Coffee> snapshot) {
+        if (snapshot.hasError) {
+          return CircularProgressIndicator();
+        }
         if (snapshot.hasData) {
           final Coffee coffee = snapshot.data!;
           return Scaffold(
